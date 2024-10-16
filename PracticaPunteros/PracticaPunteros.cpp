@@ -1,20 +1,43 @@
-// PracticaPunteros.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
-
 #include <iostream>
+#include <string>
+using namespace std;
 
-int main()
-{
-    std::cout << "Hello World!\n";
+void IntegerBytes(unsigned int _uNumber) {
+	unsigned char* uChar = reinterpret_cast<unsigned char*> (&_uNumber);
+
+	for (unsigned int uIndex = 0; uIndex < 4; uIndex++) printf("%02hhx\n", *(uChar + uIndex));
 }
 
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
+void GetBiggestInteger(int _iTable[], const unsigned int _uTableSize) {
+	int* pTable = _iTable;
 
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
+	int iBiggestInteger = INT_MIN;
+
+	for (unsigned int uIndex = 0; uIndex < _uTableSize; uIndex++) 
+		if (iBiggestInteger < *(pTable + uIndex)) 
+			iBiggestInteger = *(pTable + uIndex);
+
+	printf("The biggest integer is %d.", iBiggestInteger);
+}
+
+void GetBiggestByte(int _iTable[]) {
+
+}
+
+string InvertString(string _sString) {
+
+
+	return "";
+}
+
+int main() {
+	unsigned int uNumber = 7;
+	IntegerBytes(uNumber);
+
+	int iTable[] = {1, 3, 2, 5, 3, 0xFFFFFFFF, 2};
+	const unsigned int iTableSize = sizeof(iTable) / sizeof(int);
+	GetBiggestInteger(iTable, iTableSize);
+	GetBiggestByte(iTable);
+
+	return 0;
+}
