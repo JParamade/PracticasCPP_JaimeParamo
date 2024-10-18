@@ -20,8 +20,16 @@ void GetBiggestInteger(int _iTable[], const unsigned int _uTableSize) {
 	printf("The biggest integer is %d.", iBiggestInteger);
 }
 
-void GetBiggestByte(int _iTable[]) {
+void GetBiggestByte(int _iTable[], const unsigned int _uTableSize) {
+	int* pTable = _iTable;
 
+	unsigned char iBiggestByte = CHAR_MIN;
+
+	for (unsigned int uIndex = 0; uIndex < _uTableSize; uIndex++)
+		if (iBiggestByte < *(pTable + uIndex))
+			iBiggestByte = *(pTable + uIndex);
+
+	printf("The biggest byte is %d.", iBiggestByte);
 }
 
 string InvertString(string _sString) {
@@ -37,7 +45,7 @@ int main() {
 	int iTable[] = {1, 3, 2, 5, 3, 0xFFFFFFFF, 2};
 	const unsigned int iTableSize = sizeof(iTable) / sizeof(int);
 	GetBiggestInteger(iTable, iTableSize);
-	GetBiggestByte(iTable);
+	GetBiggestByte(iTable, iTableSize);
 
 	return 0;
 }
