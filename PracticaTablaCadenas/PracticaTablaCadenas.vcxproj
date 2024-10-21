@@ -21,9 +21,10 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{b8637cd6-02cb-4451-8bc2-4472868329ab}</ProjectGuid>
-    <RootNamespace>PracticaPunteros</RootNamespace>
+    <ProjectGuid>{057e7521-f36f-4d0b-8efc-f6fac6590bfe}</ProjectGuid>
+    <RootNamespace>PracticaTablaCadenas</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>Practica3</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -128,7 +129,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="PracticaPunteros.cpp" />
+    <ClCompile Include="PracticaTablaCadenas.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
