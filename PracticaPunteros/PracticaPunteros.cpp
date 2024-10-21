@@ -1,6 +1,5 @@
 #include <iostream>
 #include <string>
-using namespace std;
 
 void IntegerBytes(unsigned int _uNumber) {
 	unsigned char* uChar = reinterpret_cast<unsigned char*> (&_uNumber);
@@ -32,7 +31,7 @@ void GetBiggestByte(int _iTable[], const unsigned int _uTableSize) {
 	printf("The biggest byte is %d.", iBiggestByte);
 }
 
-string InvertString(string _sString) {
+std::string InvertString(std::string _sString) {
 
 
 	return "";
@@ -46,6 +45,10 @@ int main() {
 	const unsigned int iTableSize = sizeof(iTable) / sizeof(int);
 	GetBiggestInteger(iTable, iTableSize);
 	GetBiggestByte(iTable, iTableSize);
+
+	std::string sInvertedString = InvertString("");
+
+	printf("%s\n", sInvertedString);
 
 	return 0;
 }
