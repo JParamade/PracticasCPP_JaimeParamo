@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33403.182
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PracticaBits", "PracticaBits\PracticaBits.vcxproj", "{4E09055E-EA4D-40F5-B0D9-764793634811}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Practica1", "PracticaBits\PracticaBits.vcxproj", "{4E09055E-EA4D-40F5-B0D9-764793634811}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PracticaPunteros", "PracticaPunteros\PracticaPunteros.vcxproj", "{B8637CD6-02CB-4451-8BC2-4472868329AB}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Practica2", "PracticaPunteros\PracticaPunteros.vcxproj", "{B8637CD6-02CB-4451-8BC2-4472868329AB}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PracticaTablaCadenas", "PracticaTablaCadenas\PracticaTablaCadenas.vcxproj", "{057E7521-F36F-4D0B-8EFC-F6FAC6590BFE}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Practica3", "PracticaTablaCadenas\PracticaTablaCadenas.vcxproj", "{057E7521-F36F-4D0B-8EFC-F6FAC6590BFE}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PracticaEntidadesMundo", "PracticaEntidadesMundo\PracticaEntidadesMundo.vcxproj", "{5EA61D2F-A981-4DEB-91BA-798CECE4273E}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Practica4", "PracticaEntidadesMundo\PracticaEntidadesMundo.vcxproj", "{5EA61D2F-A981-4DEB-91BA-798CECE4273E}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Practica5", "PracticaOrganizacionCodigo\PracticaOrganizacionCodigo.vcxproj", "{3611315C-2DAF-482C-B24C-E57445E4C19D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,14 @@ Global
 		{5EA61D2F-A981-4DEB-91BA-798CECE4273E}.Release|x64.Build.0 = Release|x64
 		{5EA61D2F-A981-4DEB-91BA-798CECE4273E}.Release|x86.ActiveCfg = Release|Win32
 		{5EA61D2F-A981-4DEB-91BA-798CECE4273E}.Release|x86.Build.0 = Release|Win32
+		{3611315C-2DAF-482C-B24C-E57445E4C19D}.Debug|x64.ActiveCfg = Debug|x64
+		{3611315C-2DAF-482C-B24C-E57445E4C19D}.Debug|x64.Build.0 = Debug|x64
+		{3611315C-2DAF-482C-B24C-E57445E4C19D}.Debug|x86.ActiveCfg = Debug|Win32
+		{3611315C-2DAF-482C-B24C-E57445E4C19D}.Debug|x86.Build.0 = Debug|Win32
+		{3611315C-2DAF-482C-B24C-E57445E4C19D}.Release|x64.ActiveCfg = Release|x64
+		{3611315C-2DAF-482C-B24C-E57445E4C19D}.Release|x64.Build.0 = Release|x64
+		{3611315C-2DAF-482C-B24C-E57445E4C19D}.Release|x86.ActiveCfg = Release|Win32
+		{3611315C-2DAF-482C-B24C-E57445E4C19D}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

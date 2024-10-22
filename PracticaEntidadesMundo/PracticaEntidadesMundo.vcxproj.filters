@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="PracticaEntidadesMundo.cpp">
+    <ClCompile Include="Practica4.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="consola.cpp">
@@ -24,7 +24,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="consola.h">
-      <Filter>Source Files</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

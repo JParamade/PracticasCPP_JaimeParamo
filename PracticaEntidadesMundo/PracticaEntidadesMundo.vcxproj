@@ -22,7 +22,7 @@
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
     <ProjectGuid>{5ea61d2f-a981-4deb-91ba-798cece4273e}</ProjectGuid>
-    <RootNamespace>PracticaEntidadesMundo</RootNamespace>
+    <RootNamespace>Practica4</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
     <ProjectName>Practica4</ProjectName>
   </PropertyGroup>
@@ -130,7 +130,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="consola.cpp" />
-    <ClCompile Include="PracticaEntidadesMundo.cpp" />
+    <ClCompile Include="Practica4.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="consola.h" />

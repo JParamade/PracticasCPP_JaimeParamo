@@ -22,8 +22,9 @@
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
     <ProjectGuid>{3611315c-2daf-482c-b24c-e57445e4c19d}</ProjectGuid>
-    <RootNamespace>PracticaOrganizacionCodigo</RootNamespace>
+    <RootNamespace>Practica5</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>Practica5</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -127,7 +128,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="PracticaOrganizacionCodigo.cpp" />
+    <ClCompile Include="FileUtils.cpp" />
+    <ClCompile Include="Practica5.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="FileUtils.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
