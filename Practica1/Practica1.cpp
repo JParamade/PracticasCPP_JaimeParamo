@@ -1,40 +1,29 @@
 #include <iostream>
 
 #define MASK_BULLETS 0x00FF0000
-#define MASK4 0xF
-#define MASK_INFINITEBULLETS 0x00000002
+#define MASK_INFINITE_BULLETS 0x00000002
 
-unsigned int GetBulletNumber(unsigned int _uValue) {
-	unsigned int uBulletNumber = 0u;
-
-	uBulletNumber = _uValue & MASK_BULLETS;
-
-	uBulletNumber = uBulletNumber >> 16;
-
-	return uBulletNumber;
+unsigned int GetBulletNumber(unsigned int _uValue) { 
+	return (_uValue & MASK_BULLETS) >> 16; 
 }
 
 void AddBullets(unsigned int &_uValue, unsigned int _uBullets) {
 	unsigned int uBulletNumber = GetBulletNumber(_uValue);
 
 	uBulletNumber += _uBullets;
-	if (uBulletNumber > UCHAR_MAX) _uBullets = UCHAR_MAX;
+	if (uBulletNumber > UCHAR_MAX) uBulletNumber = UCHAR_MAX;
 	
 	_uValue &= ~MASK_BULLETS;
-
-	uBulletNumber = (uBulletNumber << 16);
-}
-
-bool AreInfiniteBulletsActive(unsigned int _uValue) {
-	bool bIsActivated = false;
-
-	bIsActivated = _uValue & MASK_INFINITEBULLETS;
 	
-	return bIsActivated;
+	_uValue = uBulletNumber << 16;
 }
 
-void ActivateInfiniteBullets(unsigned int &_uValue) {
-	_uValue |= MASK_INFINITEBULLETS;
+bool AreInfiniteBulletsActive(unsigned int _uValue) { 
+	return _uValue & MASK_INFINITE_BULLETS; 
+}
+
+void ActivateInfiniteBullets(unsigned int& _uValue) { 
+	_uValue |= MASK_INFINITE_BULLETS; 
 }
 
 int main() {
@@ -42,7 +31,7 @@ int main() {
 	
 	printf("You have %u bullets.\n", GetBulletNumber(uMyInfo));
 	
-	AddBullets(uMyInfo, 20);
+	AddBullets(uMyInfo, 50);
 	printf("You have %u bullets.\n", GetBulletNumber(uMyInfo));
 
 	const char* sInfiniteBullets = AreInfiniteBulletsActive(uMyInfo) ? "Infinite bullets are active." : "Infinite bullets are not active.";
