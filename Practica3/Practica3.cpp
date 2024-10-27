@@ -18,9 +18,11 @@ void GetStringInverted(unsigned int _uIndex, char* _pBuffer, unsigned int _uBuff
 	const char* pString = sStringTable[_uIndex];
 
 	if (pString != nullptr) {
-		const unsigned int uStringSize = strlen(pString);
+		const unsigned int uStringSize = static_cast<const unsigned int>(strlen(pString));
 		char* pInvertedString = new char[uStringSize + 1];
 
+		std::cout << _pBuffer;
+		std::cout << _uBufferSize;
 		// Check buffer size.
 
 		pInvertedString[uStringSize] = '\0';

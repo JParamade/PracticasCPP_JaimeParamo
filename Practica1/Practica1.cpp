@@ -15,7 +15,7 @@ void AddBullets(unsigned int &_uValue, unsigned int _uBullets) {
 	
 	_uValue &= ~MASK_BULLETS;
 	
-	_uValue = uBulletNumber << 16;
+	_uValue |= uBulletNumber << 16;
 }
 
 bool AreInfiniteBulletsActive(unsigned int _uValue) { 
