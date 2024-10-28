@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string>
 
-const char* sStringTable[]{
+const char* sStringTable[] {
 	"First String",
 	"Second String",
 	"Third String",
@@ -10,8 +10,7 @@ const char* sStringTable[]{
 const unsigned int uTableSize = sizeof(sStringTable) / sizeof(const char*);
 
 const char* GetString(unsigned int _uIndex) { 
-	if (_uIndex < uTableSize) return sStringTable[_uIndex];
-	else return "Index out of range.";
+	return _uIndex < uTableSize ? sStringTable[_uIndex] : "Index out of range.";
 }
 
 void GetStringInverted(unsigned int _uIndex, char* _pBuffer, unsigned int _uBufferSize) {
@@ -34,7 +33,7 @@ void GetStringInverted(unsigned int _uIndex, char* _pBuffer, unsigned int _uBuff
 }
 
 int main() {
-	printf("%s\n", GetString(5));
+	printf("%s\n", GetString(0));
 
 	char* pString = new char[128];
 	pString[0] = '\0';

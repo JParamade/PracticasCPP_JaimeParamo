@@ -22,7 +22,7 @@ bool AreInfiniteBulletsActive(unsigned int _uValue) {
 	return _uValue & MASK_INFINITE_BULLETS; 
 }
 
-void ActivateInfiniteBullets(unsigned int& _uValue) { 
+void ActivateInfiniteBullets(unsigned int &_uValue) { 
 	_uValue |= MASK_INFINITE_BULLETS; 
 }
 
