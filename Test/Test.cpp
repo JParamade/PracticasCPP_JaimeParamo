@@ -1,17 +1,17 @@
 #include <iostream>
 
-struct CBool {
+struct SBool {
 	bool bBool1;
 	bool bBool2;
 	bool bBool3;
 	bool bBool4;
 };
 
-struct CInt {
+struct SInt {
 	int iNumber;
 };
 
 int main() {
-	printf("%u\n", static_cast<unsigned int>(sizeof(CBool)));
-	printf("%u\n", static_cast<unsigned int>(sizeof(CInt)));
+	printf("%u\n", static_cast<unsigned int>(sizeof(SBool)));
+	printf("%u\n", static_cast<unsigned int>(sizeof(SInt)));
 }
