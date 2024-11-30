@@ -20,22 +20,22 @@ void GetBiggestInteger(int _iTable[], const unsigned int _uTableSize) {
 }
 
 void GetBiggestByte(int _iTable[], const unsigned int _uTableSize) {
-	char* pTable = reinterpret_cast<char*>(_iTable);
+	unsigned char* pTable = reinterpret_cast<unsigned char*>(_iTable);
 
-	char iBiggestByte = CHAR_MIN;
+	unsigned char iBiggestByte = 0;
 	
 	for (unsigned int uIndex = 0u; uIndex < _uTableSize; uIndex++)
 		if (iBiggestByte < *(pTable + uIndex))
 			iBiggestByte = *(pTable + uIndex);
-	
+		
 	printf("The biggest byte is %02hhx.\n", iBiggestByte);
 }
 
-// const char* InvertString(const char* _sString) {
-// 
-// 
-// 	return "";
-// }
+const char* InvertString(const char* _sString) {
+
+
+	return "";
+}
 
 int main() {
 	unsigned int uNumber = 7;
@@ -44,14 +44,11 @@ int main() {
 	int iTable[] = {1, 3, 2, 5, 3, static_cast<int>(0xFFFFFFFF), 2};
 	const unsigned int iTableSize = sizeof(iTable) / sizeof(int);
 	GetBiggestInteger(iTable, iTableSize);
-
-	for (int iNumber : iTable) IntegerBytes(iNumber);
-
 	GetBiggestByte(iTable, sizeof(iTable));
 	
-	// const char* sInvertedString = InvertString("");
-	// 
-	// printf("%s\n", sInvertedString);
+	const char* sInvertedString = InvertString("ads");
+	
+	printf("%s\n", sInvertedString);
 
 	return 0;
 }
