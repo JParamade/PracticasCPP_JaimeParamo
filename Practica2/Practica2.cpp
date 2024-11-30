@@ -31,17 +31,19 @@ void GetBiggestByte(int _iTable[], const unsigned int _uTableSize) {
 }
 
 void InvertString(char* _sString) {
-	char cAux;
-	char* pStringBegin = _sString;
-	char* pStringEnd = pStringBegin + strlen(_sString) - 1;
+	if (_sString != nullptr) {
+		char cAux;
+		char* pStringBegin = _sString;
+		char* pStringEnd = pStringBegin + strlen(_sString) - 1;
 
-	while (pStringBegin < pStringEnd) {
-		cAux = *pStringBegin;
-		*pStringBegin = *pStringEnd;
-		*pStringEnd = cAux;
+		while (pStringBegin < pStringEnd) {
+			cAux = *pStringBegin;
+			*pStringBegin = *pStringEnd;
+			*pStringEnd = cAux;
 
-		pStringBegin++;
-		pStringEnd--;
+			pStringBegin++;
+			pStringEnd--;
+		}
 	}
 }
 
