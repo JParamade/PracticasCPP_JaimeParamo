@@ -36,7 +36,7 @@ void InvertString(char* _sString) {
 		char* pStringBegin = _sString;
 		char* pStringEnd = pStringBegin + strlen(_sString) - 1;
 
-		while (pStringBegin < pStringEnd) {
+		while (pStringBegin <= pStringEnd) {
 			cAux = *pStringBegin;
 			*pStringBegin = *pStringEnd;
 			*pStringEnd = cAux;
