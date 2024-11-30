@@ -22,16 +22,13 @@ const char* GetStringInverted(unsigned int _uIndex) {
     char* pInvertedString = new char[uStringSize + 1];
     pInvertedString[uStringSize] = '\0';
 
-    for (unsigned int uIndex = 0; uIndex < uStringSize; uIndex++) {
-        pInvertedString[uIndex] = pString[uStringSize - (uIndex + 1)];
-    }
+    for (unsigned int uIndex = 0; uIndex < uStringSize; uIndex++) pInvertedString[uIndex] = pString[uStringSize - (uIndex + 1)];
 
     return pInvertedString;
 }
 
 int main() {
-
-    unsigned int uIndex = 0;
+    unsigned int uIndex = 1;
     const char* sTableString = GetString(uIndex);
     printf("%s\n", sTableString);
 
