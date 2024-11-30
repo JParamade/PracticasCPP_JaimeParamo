@@ -1,12 +1,12 @@
 #include <iostream>
 
-void IntegerBytes(unsigned int _uNumber) {
+void GetIntegerBytes(unsigned int _uNumber) {
 	unsigned char* pByte = reinterpret_cast<unsigned char*>(&_uNumber);
 
 	for (unsigned int uIndex = 0u; uIndex < 4u; uIndex++) printf("%02hhx\n", *(pByte + uIndex));
 }
 
-void GetBiggestInteger(int _iTable[], const unsigned int _uTableSize) {
+int GetBiggestInteger(int _iTable[], const unsigned int _uTableSize) {
 	int* pTable = _iTable;
 
 	int iBiggestInteger = INT_MIN;
@@ -15,19 +15,19 @@ void GetBiggestInteger(int _iTable[], const unsigned int _uTableSize) {
 		if (iBiggestInteger < *(pTable + uIndex))
 			iBiggestInteger = *(pTable + uIndex);
 
-	printf("The biggest integer is %d.\n", iBiggestInteger);
+	return iBiggestInteger;
 }
 
-void GetBiggestByte(int _iTable[], const unsigned int _uTableSize) {
+unsigned char GetBiggestByte(int _iTable[], const unsigned int _uTableSize) {
 	unsigned char* pTable = reinterpret_cast<unsigned char*>(_iTable);
 
-	unsigned char iBiggestByte = 0;
+	unsigned char bBiggestByte = 0;
 
 	for (unsigned int uIndex = 0u; uIndex < _uTableSize; uIndex++)
-		if (iBiggestByte < *(pTable + uIndex))
-			iBiggestByte = *(pTable + uIndex);
-
-	printf("The biggest byte is %02hhx.\n", iBiggestByte);
+		if (bBiggestByte < *(pTable + uIndex))
+			bBiggestByte = *(pTable + uIndex);
+	
+	return bBiggestByte;
 }
 
 void InvertString(char* _sString) {
@@ -49,12 +49,16 @@ void InvertString(char* _sString) {
 
 int main() {
 	unsigned int uNumber = 7;
-	IntegerBytes(uNumber);
+	GetIntegerBytes(uNumber);
 
 	int iTable[] = { 1, 3, 2, 5, 3, static_cast<int>(0xFFFFFFFF), 2 };
 	const unsigned int iTableSize = sizeof(iTable) / sizeof(int);
-	GetBiggestInteger(iTable, iTableSize);
-	GetBiggestByte(iTable, sizeof(iTable));
+
+	int iBiggestInteger = GetBiggestInteger(iTable, iTableSize);
+	printf("The biggest integer is %d.\n", iBiggestInteger);
+
+	unsigned char bBiggestByte = GetBiggestByte(iTable, sizeof(iTable));
+	printf("The biggest byte is %02hhx.\n", bBiggestByte);
 
 	char sInvertedString[] = "This string is getting inverted.";
 	InvertString(sInvertedString);
