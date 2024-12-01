@@ -77,25 +77,25 @@ int main()
 	TEntity* tEntities[4];
 	unsigned int uEntitiesSize = sizeof(tEntities) / sizeof(TEntity*);
 
-	funcEntity tMisFunciones1[2];
-	tMisFunciones1[0] = &MoveRight;
-	tMisFunciones1[1] = &DrawA;
-	tEntities[0] = new TEntity(tMisFunciones1, 10, 4);
+	funcEntity tMyFunctions1[2];
+	tMyFunctions1[0] = &MoveRight;
+	tMyFunctions1[1] = &DrawA;
+	tEntities[0] = new TEntity(tMyFunctions1, 10, 4);
 
-	funcEntity tMisFunciones2[2];
-	tMisFunciones2[0] = &MoveDown;
-	tMisFunciones2[1] = &DrawB;
-	tEntities[1] = new TEntity(tMisFunciones2, 10, 8);
+	funcEntity tMyFunctions2[2];
+	tMyFunctions2[0] = &MoveDown;
+	tMyFunctions2[1] = &DrawB;
+	tEntities[1] = new TEntity(tMyFunctions2, 10, 8);
 
-	funcEntity tMisFunciones3[2];
-	tMisFunciones3[0] = &MoveUp;
-	tMisFunciones3[1] = &DrawC;
-	tEntities[2] = new TEntity(tMisFunciones3, 2, 12);
+	funcEntity tMyFunctions3[2];
+	tMyFunctions3[0] = &MoveUp;
+	tMyFunctions3[1] = &DrawC;
+	tEntities[2] = new TEntity(tMyFunctions3, 2, 12);
 
-	funcEntity tMisFunciones4[2];
-	tMisFunciones4[0] = &MoveDiagonal;
-	tMisFunciones4[1] = &DrawD;
-	tEntities[3] = new TEntity(tMisFunciones4, 15, 2);
+	funcEntity tMyFunctions4[2];
+	tMyFunctions4[0] = &MoveDiagonal;
+	tMyFunctions4[1] = &DrawD;
+	tEntities[3] = new TEntity(tMyFunctions4, 15, 2);
 
 	while (true) {
 		clear();
