@@ -1,5 +1,3 @@
-// practica4.cpp
-//
 #include <stdio.h>
 #include "consola.h"
 
@@ -72,8 +70,7 @@ void MoveDiagonal(TEntity* _pEntity) {
 // ***************************************************************************************
 // MAIN
 // ***************************************************************************************
-int main()
-{
+int main() {
 	TEntity* tEntities[4];
 	unsigned int uEntitiesSize = sizeof(tEntities) / sizeof(TEntity*);
 
