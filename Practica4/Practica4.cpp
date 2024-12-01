@@ -37,6 +37,11 @@ void DrawC(TEntity* _pEntity) {
 	printf("C");
 }
 
+void DrawD(TEntity* _pEntity) {
+	gotoxy(_pEntity->m_ix, _pEntity->m_iy);
+	printf("D");
+}
+
 void MoveUp(TEntity* _pEntity) {
 	_pEntity->m_iy--;
 	if (_pEntity->m_iy < 0) _pEntity->m_iy = 10;
@@ -57,12 +62,19 @@ void MoveRight(TEntity* _pEntity) {
 	if (_pEntity->m_ix > 10) _pEntity->m_ix = 0;
 }
 
+void MoveDiagonal(TEntity* _pEntity) {
+	_pEntity->m_ix++;
+	_pEntity->m_iy++;
+	if (_pEntity->m_ix > 10) _pEntity->m_ix = 0;
+	if (_pEntity->m_iy > 10) _pEntity->m_iy = 0;
+}
+
 // ***************************************************************************************
 // MAIN
 // ***************************************************************************************
 int main()
 {
-	TEntity* tEntities[3];
+	TEntity* tEntities[4];
 	unsigned int uEntitiesSize = sizeof(tEntities) / sizeof(TEntity*);
 
 	funcEntity tMisFunciones1[2];
@@ -73,12 +85,17 @@ int main()
 	funcEntity tMisFunciones2[2];
 	tMisFunciones2[0] = &MoveDown;
 	tMisFunciones2[1] = &DrawB;
-	tEntities[1] = new TEntity(tMisFunciones2, 10, 4);
+	tEntities[1] = new TEntity(tMisFunciones2, 10, 8);
 
 	funcEntity tMisFunciones3[2];
 	tMisFunciones3[0] = &MoveUp;
 	tMisFunciones3[1] = &DrawC;
-	tEntities[2] = new TEntity(tMisFunciones3, 10, 4);
+	tEntities[2] = new TEntity(tMisFunciones3, 2, 12);
+
+	funcEntity tMisFunciones4[2];
+	tMisFunciones4[0] = &MoveDiagonal;
+	tMisFunciones4[1] = &DrawD;
+	tEntities[3] = new TEntity(tMisFunciones4, 15, 2);
 
 	while (true) {
 		clear();
