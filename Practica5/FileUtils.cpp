@@ -19,13 +19,13 @@ namespace file {
 	unsigned int ReadFile(char* _pBuffer, unsigned int _uSize, void* _pFile) {
 		std::FILE* pFile = reinterpret_cast<std::FILE*> (_pFile);
 
-		unsigned int uReadChars = static_cast<unsigned int>(fread(_pBuffer, sizeof(char), _uSize, pFile));
+		unsigned int uCharsRead = static_cast<unsigned int>(fread(_pBuffer, sizeof(char), _uSize, pFile));
 
-		return uReadChars;
+		return uCharsRead;
 	}
 
-	// unsigned int WriteFile(char* _pBuffer, unsigned int _uSize, void* _pFile) {
-	// 	return 0;
-	// 
-	// }
+	unsigned int WriteFile(char* _pBuffer, unsigned int _uSize, void* _pFile) {
+		return 0;
+	
+	}
 }
