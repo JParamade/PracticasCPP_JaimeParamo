@@ -1,5 +1,5 @@
-#include "FileUtils.h"
 #include <iostream>
+#include "FileUtils.h"
 
 int main() {
 	void* pFile = OpenFile("Test.txt", "r");

@@ -1,5 +1,5 @@
+#include <iostream>
 #include "FileUtils.h"
-#include <cstdio>
 
 void* OpenFile(const char* _sFileName, const char* _sMode) {
 	std::FILE* pFile = nullptr;
