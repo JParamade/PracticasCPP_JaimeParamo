@@ -2,13 +2,15 @@
 #include <iostream>
 
 int main() {
-	void* pFile = file::OpenFile("test.txt", "r");
+	void* pFile = OpenFile("Test.txt", "r");
 
-	const unsigned int uBufferSize = sizeof(pFile);
+	const unsigned int uBufferSize = 128;
 	char sBuffer[uBufferSize];
 
-	unsigned int uReadChars = file::ReadFile(sBuffer, uBufferSize, pFile);
-	printf("%u", uReadChars);
+	unsigned int uReadChars = ReadFile(sBuffer, uBufferSize, pFile);
+	printf("%u characters have been read.\n", uReadChars);
+
+	printf("%s\n", CloseFile(pFile) ? "File closed correctly." : "File failed to close.");
 
 	return 0;
 }
