@@ -12,11 +12,11 @@ int main() {
 	printf("%u characters have been read.\n", uCharsRead);
 
 	printf("%s\n", CloseFile(pFile) ? "File closed correctly." : "File failed to close.");
-
+	
 	// Write File
 	pFile = OpenFile("Test.txt", "a");
 
-	char sWriteBuffer[] = "Hola";
+	char sWriteBuffer[] = " Written.";
 
 	unsigned int uCharsWritten = static_cast<unsigned int>(WriteFile(sWriteBuffer, sizeof(sWriteBuffer) - 1, pFile));
 	printf("%u characters have been written.\n", uCharsWritten);
