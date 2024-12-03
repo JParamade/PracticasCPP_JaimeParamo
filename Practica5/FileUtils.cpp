@@ -15,18 +15,14 @@ bool CloseFile(void* _pFile) {
 	return iResult == 0;
 }
 
-unsigned int ReadFile(char* _pBuffer, unsigned int _uSize, void* _pFile) {
+size_t ReadFile(char* _pBuffer, unsigned int _uSize, void* _pFile) {
 	std::FILE* pFile = reinterpret_cast<std::FILE*> (_pFile);
 
-	unsigned int uCharsRead = static_cast<unsigned int>(fread(_pBuffer, sizeof(char), _uSize, pFile));
-
-	return uCharsRead;
+	return fread(_pBuffer, sizeof(char), _uSize, pFile);
 }
 
-unsigned int WriteFile(char* _pBuffer, unsigned int _uSize, void* _pFile) {
+size_t WriteFile(char* _pBuffer, unsigned int _uSize, void* _pFile) {
 	std::FILE* pFile = reinterpret_cast<std::FILE*> (_pFile);
-	
-	unsigned int uCharsWritten = static_cast<unsigned int>(fwrite(_pBuffer, sizeof(char), _uSize, pFile));
 
-	return uCharsWritten;
+	return fwrite(_pBuffer, sizeof(char), _uSize, pFile);
 }
