@@ -18,7 +18,7 @@ int main() {
 
 	char sWriteBuffer[] = "Hola";
 
-	unsigned int uCharsWritten = static_cast<unsigned int>(WriteFile(sWriteBuffer, sizeof(sWriteBuffer), pFile));
+	unsigned int uCharsWritten = static_cast<unsigned int>(WriteFile(sWriteBuffer, sizeof(sWriteBuffer) - 1, pFile));
 	printf("%u characters have been written.\n", uCharsWritten);
 
 	printf("%s\n", CloseFile(pFile) ? "File closed correctly." : "File failed to close.");

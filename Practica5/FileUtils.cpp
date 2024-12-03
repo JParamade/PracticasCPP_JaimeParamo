@@ -17,12 +17,10 @@ bool CloseFile(void* _pFile) {
 
 size_t ReadFile(char* _pBuffer, unsigned int _uSize, void* _pFile) {
 	std::FILE* pFile = reinterpret_cast<std::FILE*> (_pFile);
-
 	return fread(_pBuffer, sizeof(char), _uSize, pFile);
 }
 
 size_t WriteFile(char* _pBuffer, unsigned int _uSize, void* _pFile) {
 	std::FILE* pFile = reinterpret_cast<std::FILE*> (_pFile);
-
 	return fwrite(_pBuffer, sizeof(char), _uSize, pFile);
 }
