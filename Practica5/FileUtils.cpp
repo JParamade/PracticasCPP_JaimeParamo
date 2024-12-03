@@ -23,8 +23,10 @@ unsigned int ReadFile(char* _pBuffer, unsigned int _uSize, void* _pFile) {
 	return uCharsRead;
 }
 
-// unsigned int WriteFile(char* _pBuffer, unsigned int _uSize, void* _pFile) {
-// 	
-// 	
-// 	return 0;
-// }
+unsigned int WriteFile(char* _pBuffer, unsigned int _uSize, void* _pFile) {
+	std::FILE* pFile = reinterpret_cast<std::FILE*> (_pFile);
+	
+	unsigned int uCharsWritten = static_cast<unsigned int>(fwrite(_pBuffer, sizeof(char), _uSize, pFile));
+
+	return uCharsWritten;
+}
