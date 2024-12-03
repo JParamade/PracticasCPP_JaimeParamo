@@ -28,7 +28,7 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="test.txt">
+    <Text Include="Test.txt">
       <Filter>Source Files</Filter>
     </Text>
   </ItemGroup>
