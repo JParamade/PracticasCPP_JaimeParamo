@@ -6,9 +6,9 @@ int main() {
 	void* pFile = OpenFile("Test.txt", "r");
 
 	const unsigned int uBufferSize = 128;
-	char sReadBuffer[uBufferSize];
+	char sBuffer[uBufferSize];
 
-	unsigned int uCharsRead = static_cast<unsigned int>(ReadFile(sReadBuffer, uBufferSize, pFile));
+	unsigned int uCharsRead = static_cast<unsigned int>(ReadFile(sBuffer, uBufferSize, pFile));
 	printf("%u characters have been read.\n", uCharsRead);
 
 	printf("%s\n", CloseFile(pFile) ? "File closed correctly." : "File failed to close.");
@@ -16,9 +16,7 @@ int main() {
 	// Write File
 	pFile = OpenFile("Test.txt", "a");
 
-	char sWriteBuffer[] = " Written.";
-
-	unsigned int uCharsWritten = static_cast<unsigned int>(WriteFile(sWriteBuffer, sizeof(sWriteBuffer) - 1, pFile));
+	unsigned int uCharsWritten = static_cast<unsigned int>(WriteFile(sBuffer, uCharsRead, pFile));
 	printf("%u characters have been written.\n", uCharsWritten);
 
 	printf("%s\n", CloseFile(pFile) ? "File closed correctly." : "File failed to close.");
