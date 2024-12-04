@@ -26,3 +26,11 @@ size_t WriteFile(char* _pBuffer, unsigned int _uSize, void* _pFile) {
 
 	return fwrite(_pBuffer, sizeof(char), _uSize, pFile);
 }
+
+unsigned int CheckStringCount(char* _sString, void* _pFile) {
+	
+}
+
+unsigned int GetIntegerSum(void* _pFile) {
+	
+}
