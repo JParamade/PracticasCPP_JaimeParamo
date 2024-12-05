@@ -13,7 +13,8 @@ int main() {
 	printf("%u characters have been read.\n", uCharsRead);
 
 	printf("%s\n", CloseFile(pFile) ? "File closed successfully." : "File failed to close.");
-	
+	printf("\n");
+
 	// Write File
 	pFile = OpenFile("Test.txt", "a");
 
