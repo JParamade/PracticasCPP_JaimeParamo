@@ -7,7 +7,7 @@ int main() {
 	// const char* sString = "Test";
 	// CheckStringCount(sString, pFile);
 	
-	GetIntegerSum(pFile);
+	printf("Integers in file sum %u.", GetIntegerSum(pFile));
 
 	return 0;
 }

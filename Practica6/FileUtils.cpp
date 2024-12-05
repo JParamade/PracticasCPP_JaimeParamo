@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 #include "FileUtils.h"
 
 void* OpenFile(const char* _sFileName, const char* _sMode) {
@@ -38,13 +39,29 @@ unsigned int GetIntegerSum(void* _pFile) {
 	unsigned int iSum = 0;
 
 	const unsigned int uBufferSize = 128;
-	char* sBuffer = new char[uBufferSize];
+	char sBuffer[uBufferSize];
 	unsigned int uCharsRead = ReadFile(sBuffer, uBufferSize, _pFile);
 	sBuffer[uCharsRead] = '\0';
 
-	printf("%s", sBuffer);
+	unsigned int uAuxNumber = 0;
+	bool bIsLastNumber = false;
 
-	delete[] sBuffer;
+	for (unsigned int uIndex = 0; uIndex < uCharsRead; uIndex++) {
+		if (sBuffer[uIndex] >= 48 && sBuffer[uIndex] <= 57) {
+			bIsLastNumber = true;
+			uAuxNumber = uAuxNumber * 10 + (sBuffer[uIndex] - '0');
+		}
+		else if (sBuffer[uIndex] == ',') {
+			iSum += uAuxNumber;
+			bIsLastNumber = false;
+			uAuxNumber = 0;
+		}
+		else if (bIsLastNumber) {
+			iSum += uAuxNumber;
+			uAuxNumber = 0;
+		}
+		else uAuxNumber = 0;
+	}
 
 	return iSum;
 }
