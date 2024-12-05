@@ -1,5 +1,4 @@
 #include <iostream>
-#include <string>
 #include "FileUtils.h"
 
 void* OpenFile(const char* _sFileName, const char* _sMode) {
@@ -30,6 +29,9 @@ size_t WriteFile(char* _pBuffer, unsigned int _uSize, void* _pFile) {
 
 unsigned int CheckStringCount(char* _sString, void* _pFile) {
 	std::FILE* pFile = reinterpret_cast<std::FILE*> (_pFile);
+	
+	
+	
 	return 0;
 }
 
