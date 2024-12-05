@@ -28,9 +28,23 @@ size_t WriteFile(char* _pBuffer, unsigned int _uSize, void* _pFile) {
 }
 
 unsigned int CheckStringCount(char* _sString, void* _pFile) {
-	
+	std::FILE* pFile = reinterpret_cast<std::FILE*> (_pFile);
+	return 0;
 }
 
 unsigned int GetIntegerSum(void* _pFile) {
+	std::FILE* pFile = reinterpret_cast<std::FILE*> (_pFile);
 	
+	unsigned int iSum = 0;
+
+	const unsigned int uBufferSize = 128;
+	char* sBuffer = new char[uBufferSize];
+	unsigned int uCharsRead = ReadFile(sBuffer, uBufferSize, _pFile);
+	sBuffer[uCharsRead] = '\0';
+
+	printf("%s", sBuffer);
+
+	delete[] sBuffer;
+
+	return iSum;
 }

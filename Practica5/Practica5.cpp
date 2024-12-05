@@ -9,6 +9,7 @@ int main() {
 	char sBuffer[uBufferSize];
 
 	unsigned int uCharsRead = static_cast<unsigned int>(ReadFile(sBuffer, uBufferSize, pFile));
+	sBuffer[uCharsRead] = '\0';
 	printf("%u characters have been read.\n", uCharsRead);
 
 	printf("%s\n", CloseFile(pFile) ? "File closed correctly." : "File failed to close.");
