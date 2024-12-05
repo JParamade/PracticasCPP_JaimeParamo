@@ -27,43 +27,39 @@ size_t WriteFile(char* _pBuffer, unsigned int _uSize, void* _pFile) {
 	return fwrite(_pBuffer, sizeof(char), _uSize, pFile);
 }
 
-unsigned int CheckStringCount(char* _sString, void* _pFile) {
+unsigned int CheckStringCount(char* _pBuffer, unsigned int _uSize, const char* _sString, void* _pFile) {
 	std::FILE* pFile = reinterpret_cast<std::FILE*> (_pFile);
 	
-	
-	
+	for (unsigned int uIndex = 0; uIndex < _uSize; uIndex++) {
+
+	}
+
 	return 0;
 }
 
-unsigned int GetIntegerSum(void* _pFile) {
+unsigned int GetIntegerSum(char* _pBuffer, unsigned int _uSize, void* _pFile) {
 	std::FILE* pFile = reinterpret_cast<std::FILE*> (_pFile);
 	
-	unsigned int iSum = 0;
-
-	const unsigned int uBufferSize = 128;
-	char sBuffer[uBufferSize];
-	unsigned int uCharsRead = ReadFile(sBuffer, uBufferSize, _pFile);
-	sBuffer[uCharsRead] = '\0';
-
-	unsigned int uAuxNumber = 0;
+	unsigned int uSum = 0;
+	unsigned int uAccumulator = 0;
 	bool bIsLastNumber = false;
 
-	for (unsigned int uIndex = 0; uIndex < uCharsRead; uIndex++) {
-		if (sBuffer[uIndex] >= 48 && sBuffer[uIndex] <= 57) {
+	for (unsigned int uIndex = 0; uIndex < _uSize; uIndex++) {
+		if (_pBuffer[uIndex] >= 48 && _pBuffer[uIndex] <= 57) {
 			bIsLastNumber = true;
-			uAuxNumber = uAuxNumber * 10 + (sBuffer[uIndex] - '0');
+			uAccumulator = uAccumulator * 10 + (_pBuffer[uIndex] - '0');
 		}
-		else if (sBuffer[uIndex] == ',') {
-			iSum += uAuxNumber;
+		else if (_pBuffer[uIndex] == ',') {
+			uSum += uAccumulator;
 			bIsLastNumber = false;
-			uAuxNumber = 0;
+			uAccumulator = 0;
 		}
 		else if (bIsLastNumber) {
-			iSum += uAuxNumber;
-			uAuxNumber = 0;
+			uSum += uAccumulator;
+			uAccumulator = 0;
 		}
-		else uAuxNumber = 0;
+		else uAccumulator = 0;
 	}
 
-	return iSum;
+	return uSum;
 }
