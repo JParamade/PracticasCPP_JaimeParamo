@@ -3,17 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33403.182
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Practica1", "Practica01\Practica1.vcxproj", "{0902E8EB-A1A9-4B3D-A04A-2FEC1B67C285}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Practica01", "Practica01\Practica01.vcxproj", "{0902E8EB-A1A9-4B3D-A04A-2FEC1B67C285}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Practica2", "Practica02\Practica2.vcxproj", "{B8637CD6-02CB-4451-8BC2-4472868329AB}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Practica02", "Practica02\Practica02.vcxproj", "{B8637CD6-02CB-4451-8BC2-4472868329AB}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Practica3", "Practica03\Practica3.vcxproj", "{057E7521-F36F-4D0B-8EFC-F6FAC6590BFE}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Practica03", "Practica03\Practica03.vcxproj", "{057E7521-F36F-4D0B-8EFC-F6FAC6590BFE}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Practica4", "Practica04\Practica4.vcxproj", "{5EA61D2F-A981-4DEB-91BA-798CECE4273E}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Practica04", "Practica04\Practica04.vcxproj", "{5EA61D2F-A981-4DEB-91BA-798CECE4273E}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Practica5", "Practica05\Practica5.vcxproj", "{3611315C-2DAF-482C-B24C-E57445E4C19D}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Practica05", "Practica05\Practica05.vcxproj", "{3611315C-2DAF-482C-B24C-E57445E4C19D}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Practica6", "Practica06\Practica6.vcxproj", "{5EDDE7E9-D780-41F2-9EBA-D7EA205944D1}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Practica06", "Practica06\Practica06.vcxproj", "{5EDDE7E9-D780-41F2-9EBA-D7EA205944D1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

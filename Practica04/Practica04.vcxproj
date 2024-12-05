@@ -21,10 +21,10 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{b8637cd6-02cb-4451-8bc2-4472868329ab}</ProjectGuid>
-    <RootNamespace>Practica2</RootNamespace>
+    <ProjectGuid>{5ea61d2f-a981-4deb-91ba-798cece4273e}</ProjectGuid>
+    <RootNamespace>Practica04</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
-    <ProjectName>Practica2</ProjectName>
+    <ProjectName>Practica04</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -129,7 +129,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Practica02.cpp" />
+    <ClCompile Include="consola.cpp" />
+    <ClCompile Include="Practica04.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="consola.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
