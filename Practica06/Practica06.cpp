@@ -9,9 +9,9 @@ int main() {
 	unsigned int uCharsRead = ReadFile(sBuffer, uBufferSize, pFile);
 	sBuffer[uCharsRead] = '\0';
 
-	const char* sString = "Test";
+	const char* sString = "test";
 	
-	printf("The word \"%s\" appears %u times in the file.\n", sString, CheckStringCount(sBuffer, uCharsRead, sString, pFile));
+	printf("The string \"%s\" appears %u times in the file.\n", sString, CheckStringCount(sBuffer, uCharsRead, sString, pFile));
 	printf("Integers in file sum %u.\n", GetIntegerSum(sBuffer, uCharsRead, pFile));
 
 	printf("%s\n", CloseFile(pFile) ? "File closed successfully." : "File failed to close.");

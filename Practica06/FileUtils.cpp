@@ -30,11 +30,20 @@ size_t WriteFile(char* _pBuffer, unsigned int _uSize, void* _pFile) {
 unsigned int CheckStringCount(char* _pBuffer, unsigned int _uSize, const char* _sString, void* _pFile) {
 	std::FILE* pFile = reinterpret_cast<std::FILE*> (_pFile);
 	
-	for (unsigned int uIndex = 0; uIndex < _uSize; uIndex++) {
+	unsigned int uCurrentChar = 0;
+	unsigned int uCount = 0;
+	unsigned int uStringLength = strlen(_sString) - 1;
 
+	for (unsigned int uIndex = 0; uIndex < _uSize; uIndex++) {
+		if (*(_sString + uCurrentChar) == _pBuffer[uIndex] && uCurrentChar < uStringLength) uCurrentChar++;
+		else if (uCurrentChar == uStringLength) {
+			uCount++;
+			uCurrentChar = 0;
+		}
+		else uCurrentChar = 0;
 	}
 
-	return 0;
+	return uCount;
 }
 
 unsigned int GetIntegerSum(char* _pBuffer, unsigned int _uSize, void* _pFile) {
