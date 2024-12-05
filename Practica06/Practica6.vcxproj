@@ -128,7 +128,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="FileUtils.cpp" />
-    <ClCompile Include="Practica6.cpp" />
+    <ClCompile Include="Practica06.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FileUtils.h" />

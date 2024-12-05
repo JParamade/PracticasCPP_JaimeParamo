@@ -130,7 +130,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="consola.cpp" />
-    <ClCompile Include="Practica4.cpp" />
+    <ClCompile Include="Practica04.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="consola.h" />
