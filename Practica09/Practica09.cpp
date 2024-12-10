@@ -16,16 +16,16 @@ int main() {
 	pStringList.Push(sString3);
 	printf("%d\n", pStringList.Size());
 	pStringList.Push(sString4);
-	// printf("%d\n", pStringList.Size());
-	// printf("%s\n", pStringList.First());
-	// printf("%s\n", pStringList.Next());
-	// printf("%s\n", pStringList.Next());
-	// printf("%s\n", pStringList.Next());
-	// printf("%s\n", pStringList.Pop());
-	// printf("%s\n", pStringList.First());
-	// printf("%s\n", pStringList.Next());
-	// printf("%s\n", pStringList.Next());
+	printf("%d\n", pStringList.Size());
 
+	printf("%s\n", pStringList.First());
+	printf("%s\n", pStringList.Next());
+	printf("%s\n", pStringList.Next());
+	printf("%s\n", pStringList.Next());
+	printf("%s\n", pStringList.Pop());
+	printf("%s\n", pStringList.First());
+	printf("%s\n", pStringList.Next());
+	printf("%s\n", pStringList.Next());
 
 	return 0;
 }

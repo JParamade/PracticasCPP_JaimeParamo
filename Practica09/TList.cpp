@@ -65,13 +65,12 @@ const char* TList::Pop() {
 	const char* sTempString = pTempNode->sData;
 	
 	pHead = pHead->pNext;
-	delete pTempNode->pNext;
-
+	delete pTempNode;
+	
 	uSize--;
 	return sTempString;
 }
 
 void TList::Reset() { 
 	while (Size() > 0) Pop(); 
-	pIterator = nullptr;
 }
