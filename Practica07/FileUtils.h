@@ -8,6 +8,6 @@ namespace fileOps {
 }
 
 namespace fileFuncs {
-	unsigned int CheckStringCount(char* _pBuffer, unsigned int _uSize, const char* _sString, void* _pFile);
-	unsigned int GetIntegerSum(char* _pBuffer, unsigned int _uSize, void* _pFile);
+	unsigned int CheckStringCount(char* _pBuffer, unsigned int _uSize, const char* _sString);
+	unsigned int GetIntegerSum(char* _pBuffer, unsigned int _uSize);
 }

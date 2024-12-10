@@ -30,13 +30,13 @@ int main() {
 	pFile = OpenFile("TestP6.txt", "r");
 
 	char sBuffer2[uBufferSize];
-	uCharsRead = ReadFile(sBuffer2, uBufferSize, pFile);
+	uCharsRead = static_cast<unsigned int>(ReadFile(sBuffer2, uBufferSize, pFile));
 	sBuffer2[uCharsRead] = '\0';
 
 	const char* sString = "test";
 
-	printf("The string \"%s\" appears %u times in the file.\n", sString, CheckStringCount(sBuffer2, uCharsRead, sString, pFile));
-	printf("Integers in file sum %u.\n", GetIntegerSum(sBuffer2, uCharsRead, pFile));
+	printf("The string \"%s\" appears %u times in the file.\n", sString, CheckStringCount(sBuffer2, uCharsRead, sString));
+	printf("Integers in file sum %u.\n", GetIntegerSum(sBuffer2, uCharsRead));
 
 	printf("%s\n", CloseFile(pFile) ? "File closed successfully." : "File failed to close.");
 

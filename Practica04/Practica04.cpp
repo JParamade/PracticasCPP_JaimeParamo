@@ -71,6 +71,8 @@ void MoveDiagonal(TEntity* _pEntity) {
 // MAIN
 // ***************************************************************************************
 int main() {
+	bool bStop = false;
+
 	TEntity* tEntities[4];
 	unsigned int uEntitiesSize = sizeof(tEntities) / sizeof(TEntity*);
 
@@ -94,7 +96,7 @@ int main() {
 	tMyFunctions4[1] = &DrawD;
 	tEntities[3] = new TEntity(tMyFunctions4, 15, 2);
 
-	while (true) {
+	while (!bStop) {
 		clear();
 
 		for (unsigned int uIndex = 0; uIndex < uEntitiesSize; uIndex++) {
@@ -105,6 +107,7 @@ int main() {
 		hidecursor();
 
 		Sleep(50);
+		bStop = (GetAsyncKeyState(VK_ESCAPE) & 0x01);
 	}
 
 	for (unsigned int uIndex = 0; uIndex < uEntitiesSize; uIndex++) delete tEntities[uIndex];

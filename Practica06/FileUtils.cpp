@@ -27,10 +27,8 @@ size_t WriteFile(char* _pBuffer, unsigned int _uSize, void* _pFile) {
 	return fwrite(_pBuffer, sizeof(char), _uSize, pFile);
 }
 
-unsigned int CheckStringCount(char* _pBuffer, unsigned int _uSize, const char* _sString, void* _pFile) {
-	std::FILE* pFile = reinterpret_cast<std::FILE*> (_pFile);
-	
-	unsigned int uStringLength = strlen(_sString) - 1;
+unsigned int CheckStringCount(char* _pBuffer, unsigned int _uSize, const char* _sString) {
+	unsigned int uStringLength = static_cast<unsigned int>(strlen(_sString) - 1);
 	unsigned int uCurrentChar = 0;
 	unsigned int uCount = 0;
 
@@ -46,9 +44,7 @@ unsigned int CheckStringCount(char* _pBuffer, unsigned int _uSize, const char* _
 	return uCount;
 }
 
-unsigned int GetIntegerSum(char* _pBuffer, unsigned int _uSize, void* _pFile) {
-	std::FILE* pFile = reinterpret_cast<std::FILE*> (_pFile);
-	
+unsigned int GetIntegerSum(char* _pBuffer, unsigned int _uSize) {
 	unsigned int uSum = 0;
 	unsigned int uAccumulator = 0;
 	bool bIsLastNumber = false;
