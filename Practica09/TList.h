@@ -2,10 +2,19 @@
 
 class TList {
 public:
+	class TListNode {
+	public:
+		TListNode(const char* _sData);
+		~TListNode();
+
+		char* sData;
+		TListNode* pNext;
+	};
+
 	TList();
 	~TList();
 
-	int Size();
+	int Size() const;
 	int Push(const char* _sString);
 	const char* First();
 	const char* Next();
@@ -13,15 +22,8 @@ public:
 	void Reset();
 
 private:
-	struct TListNode {
-		TListNode(const char* _sData);
-		~TListNode();
-
-		const char* sData;
-		TListNode* pNext;
-	};
-
 	TListNode* pHead;
+	TListNode* pTail;
 	TListNode* pIterator;
 	unsigned int uSize;
 };
