@@ -22,7 +22,9 @@ int main() {
 	printf("%s\n", pStringList.Next());
 	printf("%s\n", pStringList.Next());
 	printf("%s\n", pStringList.Next());
+
 	printf("%s\n", pStringList.Pop());
+
 	printf("%s\n", pStringList.First());
 	printf("%s\n", pStringList.Next());
 	printf("%s\n", pStringList.Next());
