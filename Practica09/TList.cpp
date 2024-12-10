@@ -13,7 +13,7 @@ TList::TListNode::TListNode(const char* _sData)
 	, pNext(nullptr) 
 {}
 
-TList::TListNode::~TListNode() { delete sData; }
+TList::TListNode::~TListNode() { delete[] sData; }
 
 int TList::Size() {	return uSize; }
 
