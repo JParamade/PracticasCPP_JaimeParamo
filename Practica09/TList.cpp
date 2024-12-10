@@ -62,7 +62,9 @@ const char* TList::Pop() {
 
 	TListNode* pTempNode = pHead;
 
-	const char* sTempString = pTempNode->sData;
+	size_t uStringLength = strlen(pTempNode->sData) + 1;
+	char* sTempString = new char[uStringLength];
+	strcpy_s(sTempString, uStringLength, pTempNode->sData);
 	
 	pHead = pHead->pNext;
 	delete pTempNode;

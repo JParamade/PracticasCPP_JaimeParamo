@@ -10,24 +10,21 @@ int main() {
 	const char* sString4 = "Fourth String";
 
 	pStringList.Push(sString1);
-	printf("%d\n", pStringList.Size());
 	pStringList.Push(sString2);
-	printf("%d\n", pStringList.Size());
 	pStringList.Push(sString3);
-	printf("%d\n", pStringList.Size());
 	pStringList.Push(sString4);
-	printf("%d\n", pStringList.Size());
+	printf("List Size: %d\n", pStringList.Size());
 
-	printf("%s\n", pStringList.First());
-	printf("%s\n", pStringList.Next());
-	printf("%s\n", pStringList.Next());
-	printf("%s\n", pStringList.Next());
+	printf("First Node: %s\n", pStringList.First());
+	printf("Next Node: %s\n", pStringList.Next());
+	printf("Next Node: %s\n", pStringList.Next());
+	printf("Next Node: %s\n", pStringList.Next());
 
 	printf("%s\n", pStringList.Pop());
 
-	printf("%s\n", pStringList.First());
-	printf("%s\n", pStringList.Next());
-	printf("%s\n", pStringList.Next());
+	printf("First Node: %s\n", pStringList.First());
+	printf("Next Node: %s\n", pStringList.Next());
+	printf("Next Node: %s\n", pStringList.Next());
 
 	return 0;
 }
