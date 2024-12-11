@@ -14,17 +14,30 @@ int main() {
 	pStringList.Push(sString3);
 	pStringList.Push(sString4);
 	printf("List Size: %d\n", pStringList.Size());
+	printf("\n");
 
-	printf("First Node: %s\n", pStringList.First());
-	printf("Next Node: %s\n", pStringList.Next());
-	printf("Next Node: %s\n", pStringList.Next());
-	printf("Next Node: %s\n", pStringList.Next());
+	printf("First Node: \"%s\".\n", pStringList.First());
+	printf("Next Node: \"%s\".\n", pStringList.Next());
+	printf("Next Node: \"%s\".\n", pStringList.Next());
+	printf("Next Node: \"%s\".\n", pStringList.Next());
+	printf("\n");
 
-	printf("%s\n", pStringList.Pop());
+	printf("Popped Node: \"%s\".\n", pStringList.Pop());
+	printf("\n");
 
-	printf("First Node: %s\n", pStringList.First());
-	printf("Next Node: %s\n", pStringList.Next());
-	printf("Next Node: %s\n", pStringList.Next());
+	printf("First Node: \"%s\".\n", pStringList.First());
+	printf("Next Node: \"%s\".\n", pStringList.Next());
+	printf("Next Node: \"%s\".\n", pStringList.Next());
+	printf("\n");
+
+	pStringList.Reset();
+	printf("List Reseted.\n");
+	printf("List Size: %d\n", pStringList.Size());
+	printf("\n");
+
+	pStringList.Push(sString1);
+	printf("List Size: %d\n", pStringList.Size());
+	printf("First Node: \"%s\".\n", pStringList.First());
 
 	return 0;
 }

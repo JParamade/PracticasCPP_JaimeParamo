@@ -26,13 +26,10 @@ int TList::Size() const { return uSize; }
 int TList::Push(const char* _sString) {
 	TListNode* pNewNode = new TListNode(_sString);
 
-	if (!pHead) pHead = pNewNode;
+	if (!pHead) pHead = pTail = pNewNode;
 	else { 
-		TListNode* pTempNode = pHead;
-
-		while (pTempNode->pNext) pTempNode = pTempNode->pNext;
-
-		pTempNode->pNext = pNewNode;
+		pTail->pNext = pNewNode;
+		pTail = pNewNode;
 	}
 
 	pIterator = pHead;
@@ -43,13 +40,14 @@ int TList::Push(const char* _sString) {
 const char* TList::First() {
 	if (pHead) {
 		pIterator = pHead;
+
 		return pHead->sData;
 	}
 	else return nullptr;
 }
 
 const char* TList::Next() {
-	if (pIterator->pNext) {
+	if (pIterator && pIterator->pNext) {
 		pIterator = pIterator->pNext;
 
 		return pIterator->sData;
@@ -67,12 +65,14 @@ const char* TList::Pop() {
 	strcpy_s(sTempString, uStringLength, pTempNode->sData);
 	
 	pHead = pHead->pNext;
+
 	delete pTempNode;
-	
+
 	uSize--;
 	return sTempString;
 }
 
 void TList::Reset() { 
-	while (Size() > 0) Pop(); 
+	while (pHead) Pop(); 
+	pTail = pIterator = nullptr;
 }
