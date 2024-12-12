@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include "FileUtils.h"
+#include "TList.h"
 
 void* fileOps::OpenFile(const char* _sFileName, const char* _sMode) {
 	std::FILE* pFile = nullptr;
@@ -28,7 +29,7 @@ size_t fileOps::WriteFile(char* _pBuffer, unsigned int _uSize, void* _pFile) {
 	return fwrite(_pBuffer, sizeof(char), _uSize, pFile);
 }
 
-TList* fileOps::GetStringSum(char* _pBuffer, unsigned int _uSize) {
+void* fileOps::GetStringSum(char* _pBuffer, unsigned int _uSize) {
 	TList* pStringList = new TList();
 	
 	unsigned int uAccumulator = 0;
