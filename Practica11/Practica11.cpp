@@ -3,11 +3,11 @@
 
 int main() {
 	TList pStringList1;
-	pStringList1.Push("Hola");
-	TList pStringList2 = pStringList1;
-
-	printf("%d\n", pStringList1.Size());
-	printf("%d\n", pStringList2.Size());
+	pStringList1.Push("Pa");
+	pStringList1.Push("Ti");
+	pStringList1.Push("Mi");
+	pStringList1.Push("Cola");
+	TList pStringList2 = pStringList1.GetReverseList();
 
 	return 0;
 }

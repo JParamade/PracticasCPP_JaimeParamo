@@ -29,7 +29,7 @@ size_t fileOps::WriteFile(char* _pBuffer, unsigned int _uSize, void* _pFile) {
 	return fwrite(_pBuffer, sizeof(char), _uSize, pFile);
 }
 
-void* fileOps::GetStringSum(char* _pBuffer, unsigned int _uSize) {
+void* fileOps::GetIntegersInFile(char* _pBuffer, unsigned int _uSize) {
 	TList* pStringList = new TList();
 	
 	unsigned int uAccumulator = 0;

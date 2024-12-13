@@ -12,7 +12,7 @@ int main() {
 	unsigned int uCharsRead = static_cast<unsigned int>(ReadFile(sBuffer, uBufferSize, pFile));
 	sBuffer[uCharsRead] = '\0';
 
-	TList* pStringList = reinterpret_cast<TList*>(GetStringSum(sBuffer, uCharsRead));
+	TList* pStringList = reinterpret_cast<TList*>(GetIntegersInFile(sBuffer, uCharsRead));
 	unsigned int uListSize = pStringList->Size();
 
 	for (unsigned int uIndex = 0; uIndex < uListSize; uIndex++) printf("%s\n", pStringList->Pop());

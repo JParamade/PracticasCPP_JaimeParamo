@@ -5,5 +5,5 @@ namespace fileOps {
 	bool CloseFile(void* _pFile);
 	size_t ReadFile(char* _pBuffer, unsigned int _uSize, void* _pFile);
 	size_t WriteFile(char* _pBuffer, unsigned int _uSize, void* _pFile);
-	void* GetStringSum(char* _pBuffer, unsigned int _uSize);
+	void* GetIntegersInFile(char* _pBuffer, unsigned int _uSize);
 }

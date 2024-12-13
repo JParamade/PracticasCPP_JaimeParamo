@@ -12,9 +12,14 @@ TList::TList(const TList& _rOther)
 	: pIterator(nullptr)
 	, pHead(nullptr)
 	, pTail(nullptr)
-	, uSize(_rOther.Size())
+	, uSize(0)
 {
-	
+	TListNode* pTempNode = _rOther.pHead;
+
+	while (pTempNode) {
+		Push(pTempNode->sData);
+		pTempNode = pTempNode->pNext;
+	}
 }
 
 TList::~TList() { Reset(); }
@@ -84,4 +89,12 @@ const char* TList::Pop() {
 void TList::Reset() {
 	while (pHead) Pop();
 	pTail = pIterator = nullptr;
+}
+
+TList TList::GetReverseList() {
+	TList pTempList;
+
+
+
+	return pTempList;
 }
