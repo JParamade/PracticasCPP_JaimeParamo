@@ -9,7 +9,7 @@ TList::TList()
 {}
 
 TList::TList(const TList& _rOther)
-	: pIterator(nullptr)
+	: pIterator(nullptr) 
 	, pHead(nullptr)
 	, pTail(nullptr)
 	, uSize(0)
@@ -93,8 +93,13 @@ void TList::Reset() {
 
 TList TList::GetReverseList() {
 	TList pTempList;
+	TListNode* pTempNode = pHead;
 
-
+	while(pTempNode->pNext) { 
+		pTempList.pHead = pTempNode->pNext;
+		pTempList.pHead->pNext = pTempNode;
+		pTempNode = pTempNode->pNext;
+	}
 
 	return pTempList;
 }
