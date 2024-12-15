@@ -21,7 +21,7 @@ public:
 	const char* Next();
 	const char* Pop();
 	void Reset();
-	TList GetReverseList();
+	TList GetReverseList() const;
 
 private:
 	TListNode* pHead;

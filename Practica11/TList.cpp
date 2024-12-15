@@ -91,15 +91,22 @@ void TList::Reset() {
 	pTail = pIterator = nullptr;
 }
 
-TList TList::GetReverseList() {
-	TList pTempList;
-	TListNode* pTempNode = pHead;
+TList TList::GetReverseList() const {
+	TList lTempList;
 
-	while(pTempNode->pNext) { 
-		pTempList.pHead = pTempNode->pNext;
-		pTempList.pHead->pNext = pTempNode;
-		pTempNode = pTempNode->pNext;
+	TListNode* pCurrentNode = pHead;
+
+	while (pCurrentNode) {
+		TListNode* pNewNode = new TListNode(pCurrentNode->sData);
+
+		pNewNode->pNext = lTempList.pHead;
+		lTempList.pHead = pNewNode;
+
+		if (!lTempList.pTail) lTempList.pTail = pNewNode;
+
+		lTempList.uSize++;
+		pCurrentNode = pCurrentNode->pNext;
 	}
 
-	return pTempList;
+	return lTempList;
 }
