@@ -2,110 +2,110 @@
 #include <string>
 
 TList::TList()
-	: pIterator(nullptr)
-	, pHead(nullptr)
-	, pTail(nullptr)
-	, uSize(0)
+	: m_pIterator(nullptr)
+	, m_pHead(nullptr)
+	, m_pTail(nullptr)
+	, m_uSize(0)
 {}
 
 TList::TList(const TList& _rOther)
-	: pIterator(nullptr) 
-	, pHead(nullptr)
-	, pTail(nullptr)
-	, uSize(0)
+	: m_pIterator(nullptr) 
+	, m_pHead(nullptr)
+	, m_pTail(nullptr)
+	, m_uSize(0)
 {
-	TListNode* pTempNode = _rOther.pHead;
+	TListNode* pTempNode = _rOther.m_pHead;
 
 	while (pTempNode) {
-		Push(pTempNode->sData);
-		pTempNode = pTempNode->pNext;
+		Push(pTempNode->m_sData);
+		pTempNode = pTempNode->m_pNext;
 	}
 }
 
 TList::~TList() { Reset(); }
 
 TList::TListNode::TListNode(const char* _sData)
-	: sData(nullptr)
-	, pNext(nullptr)
+	: m_sData(nullptr)
+	, m_pNext(nullptr)
 {
 	size_t uStringLength = strlen(_sData) + 1;
-	sData = new char[uStringLength];
-	strcpy_s(sData, uStringLength, _sData);
+	m_sData = new char[uStringLength];
+	strcpy_s(m_sData, uStringLength, _sData);
 }
 
-TList::TListNode::~TListNode() { delete[] sData; }
+TList::TListNode::~TListNode() { delete[] m_sData; }
 
-int TList::Size() const { return uSize; }
+int TList::Size() const { return m_uSize; }
 
 int TList::Push(const char* _sString) {
 	TListNode* pNewNode = new TListNode(_sString);
 
-	if (!pHead) pHead = pTail = pNewNode;
+	if (!m_pHead) m_pHead = m_pTail = pNewNode;
 	else {
-		pTail->pNext = pNewNode;
-		pTail = pNewNode;
+		m_pTail->m_pNext = pNewNode;
+		m_pTail = pNewNode;
 	}
 
-	pIterator = pHead;
-	uSize++;
-	return uSize;
+	m_pIterator = m_pHead;
+	m_uSize++;
+	return m_uSize;
 }
 
 const char* TList::First() {
-	if (pHead) {
-		pIterator = pHead;
+	if (m_pHead) {
+		m_pIterator = m_pHead;
 
-		return pHead->sData;
+		return m_pHead->m_sData;
 	}
 	else return nullptr;
 }
 
 const char* TList::Next() {
-	if (pIterator && pIterator->pNext) {
-		pIterator = pIterator->pNext;
+	if (m_pIterator && m_pIterator->m_pNext) {
+		m_pIterator = m_pIterator->m_pNext;
 
-		return pIterator->sData;
+		return m_pIterator->m_sData;
 	}
 	else return nullptr;
 }
 
 const char* TList::Pop() {
-	if (!pHead) return nullptr;
+	if (!m_pHead) return nullptr;
 
-	TListNode* pTempNode = pHead;
+	TListNode* pTempNode = m_pHead;
 
-	size_t uStringLength = strlen(pTempNode->sData) + 1;
+	size_t uStringLength = strlen(pTempNode->m_sData) + 1;
 	char* sTempString = new char[uStringLength];
-	strcpy_s(sTempString, uStringLength, pTempNode->sData);
+	strcpy_s(sTempString, uStringLength, pTempNode->m_sData);
 
-	pHead = pHead->pNext;
+	m_pHead = m_pHead->m_pNext;
 
 	delete pTempNode;
 
-	uSize--;
+	m_uSize--;
 	return sTempString;
 }
 
 void TList::Reset() {
-	while (pHead) Pop();
-	pTail = pIterator = nullptr;
+	while (m_pHead) Pop();
+	m_pTail = m_pIterator = nullptr;
 }
 
 TList TList::GetReverseList() const {
 	TList lTempList;
 
-	TListNode* pCurrentNode = pHead;
+	TListNode* pCurrentNode = m_pHead;
 
 	while (pCurrentNode) {
-		TListNode* pNewNode = new TListNode(pCurrentNode->sData);
+		TListNode* pNewNode = new TListNode(pCurrentNode->m_sData);
 
-		pNewNode->pNext = lTempList.pHead;
-		lTempList.pHead = pNewNode;
+		pNewNode->m_pNext = lTempList.m_pHead;
+		lTempList.m_pHead = pNewNode;
 
-		if (!lTempList.pTail) lTempList.pTail = pNewNode;
+		if (!lTempList.m_pTail) lTempList.m_pTail = pNewNode;
 
-		lTempList.uSize++;
-		pCurrentNode = pCurrentNode->pNext;
+		lTempList.m_uSize++;
+		pCurrentNode = pCurrentNode->m_pNext;
 	}
 
 	return lTempList;

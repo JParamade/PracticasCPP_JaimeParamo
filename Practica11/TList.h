@@ -7,8 +7,8 @@ public:
 		TListNode(const char* _sData);
 		~TListNode();
 
-		char* sData;
-		TListNode* pNext;
+		char* m_sData;
+		TListNode* m_pNext;
 	};
 
 	TList();
@@ -24,8 +24,8 @@ public:
 	TList GetReverseList() const;
 
 private:
-	TListNode* pHead;
-	TListNode* pTail;
-	TListNode* pIterator;
-	unsigned int uSize;
+	TListNode* m_pHead;
+	TListNode* m_pTail;
+	TListNode* m_pIterator;
+	unsigned int m_uSize;
 };
