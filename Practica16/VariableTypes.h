@@ -1,9 +1,19 @@
 #pragma once
 
-class CInt {
+#include <iostream>
+#include "IStorable.h"
+
+class CMyInt : public IStorable{
+private:
+	int m_iValue;
+
+public:
+	CMyInt(const int _iValue)
+		: m_iValue(_iValue)
+	{}
 
 };
 
-class CString {
+class CMyString : public IStorable {
 
 };
