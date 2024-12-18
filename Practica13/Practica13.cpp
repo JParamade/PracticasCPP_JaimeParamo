@@ -2,11 +2,9 @@
 #include "ImageUtils.h"
 using namespace std;
 
-void DestroyAlpha(CImage* _pImageTable[]) {
-	unsigned int uTableSize = sizeof(_pImageTable) / sizeof(CImage);
-	
-	for (unsigned int uIndex = 0; uIndex < uTableSize; uIndex++) {
-		if (_pImageTable[uIndex]->GetType() == ImageType::PNG && _pImageTable[uIndex] != nullptr) static_cast<CPng*>(_pImageTable[uIndex])->DestroyAlpha();
+void DestroyAlpha(CImage* _pImageTable[], unsigned int _uTableSize) {
+	for (unsigned int uIndex = 0; uIndex < _uTableSize; uIndex++) {
+		if (_pImageTable[uIndex]->GetType() == ImageType::PNG) static_cast<CPng*>(_pImageTable[uIndex])->DestroyAlpha();
 	}
 }
 
@@ -18,12 +16,12 @@ int main() {
 	pImageTable[3] = new CPng();
 	pImageTable[4] = new CImage();
 
-	printf("Destroying alpha channel from PNG images...\n");
-	DestroyAlpha(pImageTable);
+	unsigned int uTableSize = sizeof(pImageTable) / sizeof(pImageTable[0]);
 
-	for (CImage* pImage : pImageTable) {
-		delete pImage;
-	}
+	printf("Destroying alpha channel from PNG images...\n");
+	DestroyAlpha(pImageTable, uTableSize);
+
+	for (unsigned int uIndex = 0; uIndex < uTableSize; uIndex++) delete pImageTable[uIndex];
 
 	return 0;
 }
