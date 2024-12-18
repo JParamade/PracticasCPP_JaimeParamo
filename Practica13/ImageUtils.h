@@ -1,23 +1,24 @@
 #pragma once
 
 enum ImageType {
+	NONE,
 	PNG, 
 	JPG
 };
 
 class CImage {
 public:
-	CImage();
+	CImage(ImageType _eImageType = ImageType::NONE);
 	~CImage();
 
-private:
-	int m_iResolutionX;
-	int m_iResolutionY;
+protected:
+	int m_iResolutionX, m_iResolutionY;
 	int m_iColorDepth;
+	ImageType eImageType;
 };
 
-class CPng : public CImage{
-
+class CPng : public CImage {
+	void DestroyAlpha();
 };
 
 class CJpg : public CImage {
