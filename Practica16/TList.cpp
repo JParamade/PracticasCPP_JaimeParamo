@@ -1,5 +1,5 @@
 #include "TList.h"
-#include "IStorable.h"
+#include "IComparable.h"
 #include <string>
 
 TList::TList()

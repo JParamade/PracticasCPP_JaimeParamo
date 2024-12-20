@@ -1,9 +1,9 @@
 #pragma once
 
 #include <iostream>
-#include "IStorable.h"
+#include "IComparable.h"
 
-class CMyInt : public IStorable{
+class CMyInt : public IComparable {
 private:
 	int m_iValue;
 
@@ -14,6 +14,12 @@ public:
 
 };
 
-class CMyString : public IStorable {
+class CMyString : public IComparable {
+private:
+	char* m_sValue;
 
+public:
+	CMyString(char* _sValue)
+		: m_sValue(_sValue)
+	{}
 };
