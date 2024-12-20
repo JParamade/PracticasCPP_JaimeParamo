@@ -8,10 +8,9 @@ private:
 	int m_iValue;
 
 public:
-	CMyInt(const int _iValue)
-		: m_iValue(_iValue)
-	{}
-
+	CMyInt(const int _iValue);
+	 
+	virtual bool Equals(const IComparable& _other) const override;
 };
 
 class CMyString : public IComparable {
@@ -19,7 +18,7 @@ private:
 	char* m_sValue;
 
 public:
-	CMyString(char* _sValue)
-		: m_sValue(_sValue)
-	{}
+	CMyString(const char* _sValue);
+
+	virtual bool Equals(const IComparable& _other) const override;
 };
