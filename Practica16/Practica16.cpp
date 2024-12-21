@@ -5,30 +5,32 @@
 int main() {
 	TList oList;
 	
-	CMyInt oNumber(1);
-	CMyInt oNumber2(2);
-	CMyInt oNumber3(3);
-	CMyInt oNumber4(3);
+	oList.Push(CMyInt(1));
+	oList.Push(CMyInt(1));
+	oList.Push(CMyInt(2));
+	oList.Push(CMyInt(3));
 
-	CMyString oString("This");
-	CMyString oString2("is");
-	CMyString oString3("a");
-	CMyString oString4("test.");
+	oList.Push(CMyString("This"));
+	oList.Push(CMyString("is"));
+	oList.Push(CMyString("a"));
+	oList.Push(CMyString("test."));
 
-	oList.Push(oNumber);
-	oList.Push(oNumber2);
-	oList.Push(oNumber3);
-	oList.Push(oNumber4);
-	oList.Push(oString);
-	oList.Push(oString2);
-	oList.Push(oString3);
-	oList.Push(oString4);
+	const IComparable* pElement = oList.First();
+	printf("First Node: ");
 
-	printf("First Node: \"%s\".\n", oList.First());
-	printf("Next Node: \"%s\".\n", oList.Next());
-	printf("Next Node: \"%s\".\n", oList.Next());
-	printf("Next Node: \"%s\".\n", oList.Next());
-	printf("\n");
+	while (pElement)
+	{
+		if (const CMyString* pMyString = dynamic_cast<const CMyString*>(pElement)) pMyString->Print();
+		else if (const CMyInt* pMyInt = dynamic_cast<const CMyInt*>(pElement))	pMyInt->Print();
+		pElement = oList.Next();
+
+		if (pElement) printf("\nNext Node: ");
+	}
+	printf("\n\n");
+
+	printf("Are element 1 and 2 equal? %s.\n", oList.First()->Equals(*oList.Next()) ? "Yes" : "No");
+	oList.Pop();
+	printf("Are element 1 and 2 equal? %s.\n", oList.First()->Equals(*oList.Next()) ? "Yes" : "No");
 
 	return 0;
 }
