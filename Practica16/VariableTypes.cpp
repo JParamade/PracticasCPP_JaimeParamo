@@ -9,17 +9,13 @@ bool CMyInt::Equals(const IComparable& _rOther) const {
     
 	if (pOther == nullptr) return false;
     
-	return (m_iValue == pOther->m_iValue);
-}
-
-int CMyInt::GetValue() const {
-	return m_iValue;
+	return m_iValue == pOther->m_iValue;
 }
 
 CMyString::CMyString(const char* _sValue) {
 	unsigned int uStringSize = strlen(_sValue) + 1;
 	m_sValue = new char[uStringSize];
-	strcpy_s(m_sValue, uStringSize,_sValue);
+	strcpy_s(m_sValue, uStringSize, _sValue);
 }
 
 
@@ -32,9 +28,5 @@ bool CMyString::Equals(const IComparable& _rOther) const {
 
 	if (pOther == nullptr) return false;
 
-	return (m_sValue == pOther->m_sValue);
-}
-
-const char* CMyString::GetValue() const {
-	return m_sValue;
+	return strcmp(m_sValue, pOther->m_sValue) == 0;
 }

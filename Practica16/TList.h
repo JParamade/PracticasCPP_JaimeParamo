@@ -4,10 +4,10 @@ class TList {
 public:
 	class TListNode {
 	public:
-		TListNode(const char* _sData);
+		TListNode(const IComparable& _pData);
 		~TListNode();
 
-		char* m_sData;
+		IComparable* m_pData;
 		TListNode* m_pNext;
 	};
 
