@@ -4,6 +4,10 @@ CMyInt::CMyInt(const int _iValue)
 	: m_iValue(_iValue)
 {}
 
+CMyInt* CMyInt::Clone() const {
+	return new CMyInt(*this);
+}
+
 bool CMyInt::Equals(const IComparable& _rOther) const {
     const CMyInt* pOther = dynamic_cast<const CMyInt*>(&_rOther);
     
@@ -21,6 +25,10 @@ CMyString::CMyString(const char* _sValue) {
 
 CMyString::~CMyString() {
 	delete[] m_sValue;
+}
+
+CMyString* CMyString::Clone() const {
+	return new CMyString(*this);
 }
 
 bool CMyString::Equals(const IComparable& _rOther) const {

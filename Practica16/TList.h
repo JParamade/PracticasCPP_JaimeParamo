@@ -1,10 +1,12 @@
 #pragma once
 
+#include "IComparable.h"
+
 class TList {
 public:
 	class TListNode {
 	public:
-		TListNode(const IComparable& _pData);
+		TListNode(const IComparable& _rData);
 		~TListNode();
 
 		IComparable* m_pData;
@@ -16,10 +18,10 @@ public:
 	~TList();
 
 	int Size() const;
-	int Push(const char* _sString);
-	const char* First();
-	const char* Next();
-	const char* Pop();
+	int Push(const IComparable& _rData);
+	IComparable* First();
+	IComparable* Next();
+	IComparable* Pop();
 	void Reset();
 	TList GetReverseList() const;
 

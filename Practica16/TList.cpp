@@ -18,24 +18,24 @@ TList::TList(const TList& _rOther)
 	TListNode* pTempNode = _rOther.m_pHead;
 
 	while (pTempNode) {
-		Push(pTempNode->m_pData);
+		Push(*(pTempNode->m_pData));
 		pTempNode = pTempNode->m_pNext;
 	}
 }
 
 TList::~TList() { Reset(); }
 
-TList::TListNode::TListNode(const IComparable& _sData)
-	: m_pData(nullptr)
+TList::TListNode::TListNode(const IComparable& _rData)
+	: m_pData(_rData.Clone())
 	, m_pNext(nullptr)
 {}
 
-TList::TListNode::~TListNode() { delete[] m_pData; }
+TList::TListNode::~TListNode() { delete m_pData; }
 
 int TList::Size() const { return m_uSize; }
 
-int TList::Push(const char* _sString) {
-	TListNode* pNewNode = new TListNode(_sString);
+int TList::Push(const IComparable& _rData) {
+	TListNode* pNewNode = new TListNode(_rData);
 
 	if (!m_pHead) m_pHead = m_pTail = pNewNode;
 	else {
@@ -48,7 +48,7 @@ int TList::Push(const char* _sString) {
 	return m_uSize;
 }
 
-const char* TList::First() {
+IComparable* TList::First() {
 	if (m_pHead) {
 		m_pIterator = m_pHead;
 
@@ -57,7 +57,7 @@ const char* TList::First() {
 	else return nullptr;
 }
 
-const char* TList::Next() {
+IComparable* TList::Next() {
 	if (m_pIterator && m_pIterator->m_pNext) {
 		m_pIterator = m_pIterator->m_pNext;
 
@@ -66,21 +66,19 @@ const char* TList::Next() {
 	else return nullptr;
 }
 
-const char* TList::Pop() {
+IComparable*TList::Pop() {
 	if (!m_pHead) return nullptr;
 
 	TListNode* pTempNode = m_pHead;
 
-	size_t uStringLength = strlen(pTempNode->m_pData) + 1;
-	char* sTempString = new char[uStringLength];
-	strcpy_s(sTempString, uStringLength, pTempNode->m_pData);
+	IComparable* pTempData = pTempNode->m_pData->Clone();
 
 	m_pHead = m_pHead->m_pNext;
 
 	delete pTempNode;
 
 	m_uSize--;
-	return sTempString;
+	return pTempData;
 }
 
 void TList::Reset() {
@@ -94,7 +92,7 @@ TList TList::GetReverseList() const {
 	TListNode* pCurrentNode = m_pHead;
 
 	while (pCurrentNode) {
-		TListNode* pNewNode = new TListNode(pCurrentNode->m_pData);
+		TListNode* pNewNode = new TListNode(*(pCurrentNode->m_pData));
 
 		pNewNode->m_pNext = lTempList.m_pHead;
 		lTempList.m_pHead = pNewNode;
