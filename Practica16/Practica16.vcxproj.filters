@@ -21,9 +21,6 @@
     <ClCompile Include="TList.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="IStorable.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="VariableTypes.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -32,7 +29,7 @@
     <ClInclude Include="TList.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="IStorable.h">
+    <ClInclude Include="IComparable.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="VariableTypes.h">

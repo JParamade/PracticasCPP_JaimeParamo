@@ -11,6 +11,8 @@ public:
 	CMyInt(const int _iValue);
 	 
 	virtual bool Equals(const IComparable& _other) const override;
+
+	int GetValue() const ;
 };
 
 class CMyString : public IComparable {
@@ -19,6 +21,9 @@ private:
 
 public:
 	CMyString(const char* _sValue);
+	~CMyString();
 
 	virtual bool Equals(const IComparable& _other) const override;
+	
+	const char* GetValue() const;
 };

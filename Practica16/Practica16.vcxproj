@@ -127,13 +127,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="IStorable.cpp" />
     <ClCompile Include="Practica16.cpp" />
     <ClCompile Include="TList.cpp" />
     <ClCompile Include="VariableTypes.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="IStorable.h" />
+    <ClInclude Include="IComparable.h" />
     <ClInclude Include="TList.h" />
     <ClInclude Include="VariableTypes.h" />
   </ItemGroup>
