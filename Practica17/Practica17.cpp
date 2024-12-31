@@ -32,15 +32,16 @@ public:
 };
 
 #define EXPAND(x) x
-#define GET_MACRO(_1, _2, _3, _4, _5, _6, _7, NAME) NAME
+#define GET_MACRO(_1, _2, _3, _4, _5, _6, _7, _8, NAME) NAME
 #define FE_1(_WHAT, X) _WHAT(X)
 #define FE_2(_WHAT, X, ...) EXPAND(_WHAT(X)FE_1(_WHAT, __VA_ARGS__))
 #define FE_3(_WHAT, X, ...) EXPAND(_WHAT(X)FE_2(_WHAT, __VA_ARGS__))
 #define FE_4(_WHAT, X, ...) EXPAND(_WHAT(X)FE_3(_WHAT, __VA_ARGS__))
 #define FE_5(_WHAT, X, ...) EXPAND(_WHAT(X)FE_4(_WHAT, __VA_ARGS__))
 #define FE_6(_WHAT, X, ...) EXPAND(_WHAT(X)FE_5(_WHAT, __VA_ARGS__))
+#define FE_7(_WHAT, X, ...) EXPAND(_WHAT(X)FE_5(_WHAT, __VA_ARGS__))
 #define MACRO_FOR_EACH_ARGUMENT(_ACTION, ...) \
-EXPAND(GET_MACRO(__VA_ARGS__, FE_6, FE_5, FE_4, FE_3, FE_2, FE_1)(_ACTION, __VA_ARGS__))
+EXPAND(GET_MACRO(__VA_ARGS__, FE_7, FE_6, FE_5, FE_4, FE_3, FE_2, FE_1)(_ACTION, __VA_ARGS__))
 
 #define DECLARE_ENUM_VALUE(_ENUM) _ENUM,
 
