@@ -92,4 +92,6 @@ int main()
 	printf("%s\n", EMacroColor::AsStr(EMacroColor::ORANGE));
 	EMacroColor::Enum eMacroColor = EMacroColor::AsEnum("PURPLE");
 	printf("%s\n", EMacroColor::AsStr(eMacroColor));
+
+	return 0;
 }
