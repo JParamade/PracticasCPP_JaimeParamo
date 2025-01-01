@@ -5,81 +5,118 @@ class TList {
 public:
 	class TListNode {
 	public:
-		TListNode(T _rData)
-			: m_Data(_rData)
-			, m_pNext(nullptr)
-		{}
-		~TListNode() { delete[] m_Data; }
+		TListNode(const T& _rData)
+			: m_pNext(nullptr)
+		{
+			m_pData = new T(_rData);
+		}
 
-		T m_Data;
+		~TListNode() { delete m_pData; }
+
+		T* m_pData;
 		TListNode* m_pNext;
 	};
 
 	TList()
-		: pIterator(nullptr)
-		, pHead(nullptr)
-		, pTail(nullptr)
-		, uSize(0)
+		: m_pIterator(nullptr)
+		, m_pHead(nullptr)
+		, m_pTail(nullptr)
+		, m_uSize(0)
 	{}
+
+	TList(const TList& _rOther)
+		: m_pIterator(nullptr)
+		, m_pHead(nullptr)
+		, m_pTail(nullptr)
+		, m_uSize(0)
+	{
+		TListNode* pTempNode = _rOther.m_pHead;
+
+		while (pTempNode) {
+			Push(*(pTempNode->m_pData));
+			pTempNode = pTempNode->m_pNext;
+		}
+	}
+
 	~TList() { Reset(); }
 
-	int Size() const { return uSize; }
+	int Size() const { return m_uSize; }
 
-	int Push(T _oElement) {
-		TListNode* pNewNode = new TListNode(_oElement);
+	int Push(const T& _rData) {
+		TListNode* pNewNode = new TListNode(_rData);
 
-		if (!pHead) pHead = pTail = pNewNode;
+		if (!m_pHead) m_pHead = m_pTail = pNewNode;
 		else {
-			pTail->m_pNext = pNewNode;
-			pTail = pNewNode;
+			m_pTail->m_pNext = pNewNode;
+			m_pTail = pNewNode;
 		}
 
-		pIterator = pHead;
-		uSize++;
-		return uSize;
+		m_pIterator = m_pHead;
+		m_uSize++;
+		return m_uSize;
 	}
 
-	T First() {
-		if (pHead) {
-			pIterator = pHead;
+	T* First() {
+		if (m_pHead) {
+			m_pIterator = m_pHead;
 
-			return pHead->m_Data;
-		}
-		else return nullptr;
-	}
-
-	T Next() {
-		if (pIterator && pIterator->m_pNext) {
-			pIterator = pIterator->m_pNext;
-
-			return pIterator->m_Data;
+			return m_pHead->m_pData;
 		}
 		else return nullptr;
 	}
 
-	T Pop() {
-		if (!pHead) return nullptr;
+	T* Next() {
+		if (m_pIterator && m_pIterator->m_pNext) {
+			m_pIterator = m_pIterator->m_pNext;
 
-		TListNode* pTempNode = pHead;
+			return m_pIterator->m_pData;
+		}
+		else return nullptr;
+	}
 
-		T oTempData = pHead->m_Data;
+	T* Pop() {
+		if (!m_pHead) return nullptr;
 
-		pHead = pHead->m_pNext;
+		TListNode* pTempNode = m_pHead;
+
+		T* pTempData = pTempNode->m_pData;
+
+		m_pHead = m_pHead->m_pNext;
 
 		delete pTempNode;
 
-		uSize--;
-		return oTempData;
+		m_uSize--;
+		return pTempData;
 	}
 
 	void Reset() {
-		while (pHead) Pop();
-		pTail = pIterator = nullptr;
+		while (m_pHead) Pop();
+		m_pTail = m_pIterator = nullptr;
+	}
+
+	TList GetReverseList() const {
+		TList lTempList;
+
+		TListNode* pCurrentNode = m_pHead;
+
+		while (pCurrentNode) {
+			TListNode* pNewNode = new TListNode(*(pCurrentNode->m_pData));
+
+			pNewNode->m_pNext = lTempList.m_pHead;
+			lTempList.m_pHead = pNewNode;
+
+			if (!lTempList.m_pTail) lTempList.m_pTail = pNewNode;
+
+			lTempList.m_uSize++;
+			pCurrentNode = pCurrentNode->m_pNext;
+		}
+
+		return lTempList;
 	}
 
 private:
-	TListNode* pHead;
-	TListNode* pTail;
-	TListNode* pIterator;
-	unsigned int uSize;
+	TListNode* m_pHead;
+	TListNode* m_pTail;
+	TListNode* m_pIterator;
+	unsigned int m_uSize;
 };

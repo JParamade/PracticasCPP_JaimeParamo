@@ -9,12 +9,12 @@ int main() {
 	oIntList.Push(3);
 	oIntList.Push(4);
 
-	int pIntElement = oIntList.First();
+	int* pIntElement = oIntList.First();
 	printf("First Node: ");
 
 	while (pIntElement)
 	{
-		printf("%d", pIntElement);
+		printf("%d", *pIntElement);
 		pIntElement = oIntList.Next();
 
 		if (pIntElement) printf("\nNext Node: ");
@@ -22,23 +22,23 @@ int main() {
 	printf("\n\n");
 
 	TList<std::string> oStringList;
-
+	
 	oStringList.Push("This");
 	oStringList.Push("is");
 	oStringList.Push("a");
 	oStringList.Push("test.");
-
-	std::string pStringElement = oStringList.First();
+	
+	std::string* pStringElement = oStringList.First();
 	printf("First Node: ");
-
+	
 	while (pStringElement)
 	{
-		printf("%s", pStringElement);
+		std::cout << *pStringElement;
 		pStringElement = oStringList.Next();
-
+	
 		if (pStringElement) printf("\nNext Node: ");
 	}
-	printf("\n\n");
+	printf("\n");
 
 	return 0;
 }
