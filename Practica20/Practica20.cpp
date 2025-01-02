@@ -57,7 +57,7 @@ void MoveLeft(TEntity* _pEntity) {
 void MoveRandom(TEntity* _pEntity)
 {
 	_pEntity->m_ix += RandomIntegerInRange(2) * (RandomIntegerInRange(2) ? 1 : -1);
-	_pEntity->m_iy += RandomIntegerInRange(2);
+	_pEntity->m_iy += RandomIntegerInRange(2) * (RandomIntegerInRange(2) ? 1 : -1);
 
 	if (_pEntity->m_iy < MIN_SCREEN_SIZE) _pEntity->m_iy = MAX_SCREEN_SIZE;
 	if (_pEntity->m_iy > MAX_SCREEN_SIZE) _pEntity->m_iy = MIN_SCREEN_SIZE;
@@ -94,9 +94,8 @@ int main() {
 			((*it)->m_funcs[1])(*it);
 		}
 
-		while(lEntities.size() < MIN_ENTITIES)
+		while (lEntities.size() < MIN_ENTITIES) GenerateRandomEntity(lEntities);
 		
-	
 		hidecursor();
 		bStop = (GetAsyncKeyState(VK_ESCAPE) & 0x01);
 		Sleep(50);
