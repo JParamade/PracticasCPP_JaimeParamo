@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <random>
+#include <chrono>
 #include <list>
 #include "consola.h"
 
@@ -7,7 +8,7 @@ struct TEntity;
 typedef void (*funcEntity)(TEntity*);
 
 // ***************************************************************************************
-// ENTIDAD
+// ENTITY
 // ***************************************************************************************
 struct TEntity
 {
@@ -28,6 +29,10 @@ inline int RandomIntegerInRange(int _iMaxNumber, int _iOffset = 0) {
 	return (rand() % _iMaxNumber + _iOffset);
 }
 
+TEntity* GenerateEntity(funcEntity* _tFuncs, int _iX, int _iY, int _iHealth) {
+	return new TEntity(_tFuncs, _iX, _iY, _iHealth);
+}
+
 void CheckHealth(TEntity* _pEntity) {
 
 }
@@ -39,29 +44,29 @@ void DrawEntity(TEntity* _pEntity) {
 
 void MoveUp(TEntity* _pEntity) {
 	_pEntity->m_iy--;
-	if (_pEntity->m_iy < 0) _pEntity->m_iy = 10;
+	if (_pEntity->m_iy < 0) _pEntity->m_iy = 20;
 }
 
 void MoveDown(TEntity* _pEntity) {
 	_pEntity->m_iy++;
-	if (_pEntity->m_iy > 10) _pEntity->m_iy = 0;
+	if (_pEntity->m_iy > 20) _pEntity->m_iy = 0;
 }
 
 void MoveLeft(TEntity* _pEntity) {
 	_pEntity->m_ix--;
-	if (_pEntity->m_ix < 0) _pEntity->m_ix = 10;
+	if (_pEntity->m_ix < 0) _pEntity->m_ix = 20;
 }
 
 void MoveRight(TEntity* _pEntity) {
 	_pEntity->m_ix++;
-	if (_pEntity->m_ix > 10) _pEntity->m_ix = 0;
+	if (_pEntity->m_ix > 20) _pEntity->m_ix = 0;
 }
 
 void MoveDiagonal(TEntity* _pEntity) {
 	_pEntity->m_ix++;
 	_pEntity->m_iy++;
-	if (_pEntity->m_ix > 10) _pEntity->m_ix = 0;
-	if (_pEntity->m_iy > 10) _pEntity->m_iy = 0;
+	if (_pEntity->m_ix > 20) _pEntity->m_ix = 0;
+	if (_pEntity->m_iy > 20) _pEntity->m_iy = 0;
 }
 
 // ***************************************************************************************
@@ -70,42 +75,41 @@ void MoveDiagonal(TEntity* _pEntity) {
 int main() {
 	bool bStop = false;
 	
-	std::list<TEntity*> lEntities;
+	std::list<TEntity*> lTotalEntities;
+	std::list<TEntity*> lAliveEntities;
+	std::list<funcEntity*> lFuncs;
 	srand(time(NULL));
 
-	funcEntity tMyFunctions1[2];
-	tMyFunctions1[0] = &MoveRight;
-	tMyFunctions1[1] = &DrawEntity;
-	lEntities.push_back(new TEntity(tMyFunctions1, 10, 4, RandomIntegerInRange(10, 1)));
+	for (unsigned int uIndex = 0; uIndex < 5; uIndex++) {
+		funcEntity* tMyFunctions = new funcEntity[2];
+		lFuncs.push_back(tMyFunctions);
 
-	funcEntity tMyFunctions2[2];
-	tMyFunctions2[0] = &MoveDown;
-	tMyFunctions2[1] = &DrawEntity;
-	lEntities.push_back(new TEntity(tMyFunctions2, 10, 8, RandomIntegerInRange(10, 1)));
+		int iRandomNumber = RandomIntegerInRange(4);
+		if (iRandomNumber == 0) tMyFunctions[0] = &MoveUp;
+		else if (iRandomNumber == 1) tMyFunctions[0] = &MoveDown;
+		else if (iRandomNumber == 2) tMyFunctions[0] = &MoveRight;
+		else if (iRandomNumber == 3) tMyFunctions[0] = &MoveLeft;
+		else if (iRandomNumber == 4) tMyFunctions[0] = &MoveDiagonal;
 
-	funcEntity tMyFunctions3[2];
-	tMyFunctions3[0] = &MoveUp;
-	tMyFunctions3[1] = &DrawEntity;
-	lEntities.push_back(new TEntity(tMyFunctions3, 2, 12, RandomIntegerInRange(10, 1)));
+		tMyFunctions[1] = &DrawEntity;
 
-	funcEntity tMyFunctions4[2];
-	tMyFunctions4[0] = &MoveDiagonal;
-	tMyFunctions4[1] = &DrawEntity;
-	lEntities.push_back(new TEntity(tMyFunctions4, 15, 2, RandomIntegerInRange(10, 1)));
+		lTotalEntities.push_back(GenerateEntity(tMyFunctions, RandomIntegerInRange(20, 1), RandomIntegerInRange(20, 1), RandomIntegerInRange(9, 1)));
+	}
 
 	while (!bStop) {
 		clear();
-
-		for (std::list<TEntity*>::iterator it = lEntities.begin(); it != lEntities.end(); ++it) {
+	
+		for (std::list<TEntity*>::iterator it = lTotalEntities.begin(); it != lTotalEntities.end(); ++it) {
 			((*it)->m_funcs[0])(*it);
 			((*it)->m_funcs[1])(*it);
 		}
-
+	
 		hidecursor();
-
+	
 		Sleep(50);
 		bStop = (GetAsyncKeyState(VK_ESCAPE) & 0x01);
 	}
 
-	for (std::list<TEntity*>::iterator it = lEntities.begin(); it != lEntities.end(); ++it) delete *it;
+	for (std::list<TEntity*>::iterator it = lTotalEntities.begin(); it != lTotalEntities.end(); ++it) delete *it;
+	for (std::list<funcEntity*>::iterator it = lFuncs.begin(); it != lFuncs.end(); ++it) delete[] *it;
 }
