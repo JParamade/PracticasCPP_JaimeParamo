@@ -30,6 +30,8 @@ struct TEntity
 	}
 };
 
+inline int RandomIntegerInRange(int _iMaxNumber, int _iOffset = 0) { return (rand() % _iMaxNumber + _iOffset); }
+
 void DrawEntity(TEntity* _pEntity) { gotoxy(_pEntity->m_ix, _pEntity->m_iy); printf("%c", _pEntity->m_iHealth + '0'); }
 
 void MoveUp(TEntity* _pEntity) {
@@ -42,27 +44,29 @@ void MoveDown(TEntity* _pEntity) {
 	if (_pEntity->m_iy > MAX_SCREEN_SIZE) _pEntity->m_iy = MIN_SCREEN_SIZE;
 }
 
-void MoveLeft(TEntity* _pEntity) {
-	_pEntity->m_ix--;
-	if (_pEntity->m_ix < MIN_SCREEN_SIZE) _pEntity->m_ix = MAX_SCREEN_SIZE;
-}
-
 void MoveRight(TEntity* _pEntity) {
 	_pEntity->m_ix++;
 	if (_pEntity->m_ix > MAX_SCREEN_SIZE) _pEntity->m_ix = MIN_SCREEN_SIZE;
 }
 
-void MoveDiagonal(TEntity* _pEntity) {
-	_pEntity->m_ix++;
-	_pEntity->m_iy++;
-	if (_pEntity->m_ix > MAX_SCREEN_SIZE) _pEntity->m_ix = MIN_SCREEN_SIZE;
-	if (_pEntity->m_iy > MAX_SCREEN_SIZE) _pEntity->m_iy = MIN_SCREEN_SIZE;
+void MoveLeft(TEntity* _pEntity) {
+	_pEntity->m_ix--;
+	if (_pEntity->m_ix < MIN_SCREEN_SIZE) _pEntity->m_ix = MAX_SCREEN_SIZE;
 }
 
-inline int RandomIntegerInRange(int _iMaxNumber, int _iOffset = 0) { return (rand() % _iMaxNumber + _iOffset); }
+void MoveRandom(TEntity* _pEntity)
+{
+	_pEntity->m_ix += RandomIntegerInRange(2) * (RandomIntegerInRange(2) ? 1 : -1);
+	_pEntity->m_iy += RandomIntegerInRange(2);
+
+	if (_pEntity->m_iy < MIN_SCREEN_SIZE) _pEntity->m_iy = MAX_SCREEN_SIZE;
+	if (_pEntity->m_iy > MAX_SCREEN_SIZE) _pEntity->m_iy = MIN_SCREEN_SIZE;
+	if (_pEntity->m_ix > MAX_SCREEN_SIZE) _pEntity->m_ix = MIN_SCREEN_SIZE;
+	if (_pEntity->m_ix < MIN_SCREEN_SIZE) _pEntity->m_ix = MAX_SCREEN_SIZE;
+}
 
 void GenerateRandomEntity(std::list<TEntity*>& _rEntities) {
-	funcEntity tFunctions[6] = { &DrawEntity, &MoveUp, &MoveDown, &MoveRight, &MoveLeft, &MoveDiagonal };
+	funcEntity tFunctions[6] = {&DrawEntity, &MoveUp, &MoveDown, &MoveRight, &MoveLeft, &MoveRandom};
 
 	_rEntities.push_back(new TEntity(tFunctions[0],
 		tFunctions[RandomIntegerInRange(5, 1)],
