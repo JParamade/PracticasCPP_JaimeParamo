@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include <random>
+#include <list>
 #include "consola.h"
 
 struct TEntity;
@@ -11,33 +13,28 @@ struct TEntity
 {
 	int m_ix;
 	int m_iy;
+	int m_iHealth;
 	funcEntity* m_funcs;
-	TEntity(funcEntity* funcs, int x, int y)
+	TEntity(funcEntity* funcs, int x, int y, int _iHealth)
 	{
 		m_ix = x;
 		m_iy = y;
+		m_iHealth = _iHealth;
 		m_funcs = funcs;
 	}
 };
 
-void DrawA(TEntity* _pEntity) {
-	gotoxy(_pEntity->m_ix, _pEntity->m_iy);
-	printf("A");
+inline int RandomIntegerInRange(int _iMaxNumber, int _iOffset = 0) {
+	return (rand() % _iMaxNumber + _iOffset);
 }
 
-void DrawB(TEntity* _pEntity) {
-	gotoxy(_pEntity->m_ix, _pEntity->m_iy);
-	printf("B");
+void CheckHealth(TEntity* _pEntity) {
+
 }
 
-void DrawC(TEntity* _pEntity) {
+void DrawEntity(TEntity* _pEntity) {
 	gotoxy(_pEntity->m_ix, _pEntity->m_iy);
-	printf("C");
-}
-
-void DrawD(TEntity* _pEntity) {
-	gotoxy(_pEntity->m_ix, _pEntity->m_iy);
-	printf("D");
+	printf("%c", _pEntity->m_iHealth + '0');
 }
 
 void MoveUp(TEntity* _pEntity) {
@@ -72,36 +69,36 @@ void MoveDiagonal(TEntity* _pEntity) {
 // ***************************************************************************************
 int main() {
 	bool bStop = false;
-
-	TEntity* tEntities[4];
-	unsigned int uEntitiesSize = sizeof(tEntities) / sizeof(TEntity*);
+	
+	std::list<TEntity*> lEntities;
+	srand(time(NULL));
 
 	funcEntity tMyFunctions1[2];
 	tMyFunctions1[0] = &MoveRight;
-	tMyFunctions1[1] = &DrawA;
-	tEntities[0] = new TEntity(tMyFunctions1, 10, 4);
+	tMyFunctions1[1] = &DrawEntity;
+	lEntities.push_back(new TEntity(tMyFunctions1, 10, 4, RandomIntegerInRange(10, 1)));
 
 	funcEntity tMyFunctions2[2];
 	tMyFunctions2[0] = &MoveDown;
-	tMyFunctions2[1] = &DrawB;
-	tEntities[1] = new TEntity(tMyFunctions2, 10, 8);
+	tMyFunctions2[1] = &DrawEntity;
+	lEntities.push_back(new TEntity(tMyFunctions2, 10, 8, RandomIntegerInRange(10, 1)));
 
 	funcEntity tMyFunctions3[2];
 	tMyFunctions3[0] = &MoveUp;
-	tMyFunctions3[1] = &DrawC;
-	tEntities[2] = new TEntity(tMyFunctions3, 2, 12);
+	tMyFunctions3[1] = &DrawEntity;
+	lEntities.push_back(new TEntity(tMyFunctions3, 2, 12, RandomIntegerInRange(10, 1)));
 
 	funcEntity tMyFunctions4[2];
 	tMyFunctions4[0] = &MoveDiagonal;
-	tMyFunctions4[1] = &DrawD;
-	tEntities[3] = new TEntity(tMyFunctions4, 15, 2);
+	tMyFunctions4[1] = &DrawEntity;
+	lEntities.push_back(new TEntity(tMyFunctions4, 15, 2, RandomIntegerInRange(10, 1)));
 
 	while (!bStop) {
 		clear();
 
-		for (unsigned int uIndex = 0; uIndex < uEntitiesSize; uIndex++) {
-			(*tEntities[uIndex]->m_funcs[0])(tEntities[uIndex]);
-			(*tEntities[uIndex]->m_funcs[1])(tEntities[uIndex]);
+		for (std::list<TEntity*>::iterator it = lEntities.begin(); it != lEntities.end(); ++it) {
+			((*it)->m_funcs[0])(*it);
+			((*it)->m_funcs[1])(*it);
 		}
 
 		hidecursor();
@@ -110,5 +107,5 @@ int main() {
 		bStop = (GetAsyncKeyState(VK_ESCAPE) & 0x01);
 	}
 
-	for (unsigned int uIndex = 0; uIndex < uEntitiesSize; uIndex++) delete tEntities[uIndex];
+	for (std::list<TEntity*>::iterator it = lEntities.begin(); it != lEntities.end(); ++it) delete *it;
 }

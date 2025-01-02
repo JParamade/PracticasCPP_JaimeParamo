@@ -18,5 +18,13 @@
     <ClCompile Include="Practica20.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="consola.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="consola.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
