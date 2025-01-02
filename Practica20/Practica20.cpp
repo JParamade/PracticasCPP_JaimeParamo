@@ -4,6 +4,10 @@
 #include <list>
 #include "consola.h"
 
+const unsigned int MIN_SCREEN_SIZE = 1;
+const unsigned int MAX_SCREEN_SIZE = 20;
+const unsigned int MIN_ENTITIES = 5;
+
 struct TEntity;
 typedef void (*funcEntity)(TEntity*);
 
@@ -15,58 +19,56 @@ struct TEntity
 	int m_ix;
 	int m_iy;
 	int m_iHealth;
-	funcEntity* m_funcs;
-	TEntity(funcEntity* funcs, int x, int y, int _iHealth)
+	funcEntity m_funcs[2];
+	TEntity(funcEntity drawFunc, funcEntity moveFunc, int x, int y, int _iHealth)
 	{
 		m_ix = x;
 		m_iy = y;
 		m_iHealth = _iHealth;
-		m_funcs = funcs;
+		m_funcs[0] = drawFunc;
+		m_funcs[1] = moveFunc;
 	}
 };
 
-inline int RandomIntegerInRange(int _iMaxNumber, int _iOffset = 0) {
-	return (rand() % _iMaxNumber + _iOffset);
-}
-
-TEntity* GenerateEntity(funcEntity* _tFuncs, int _iX, int _iY, int _iHealth) {
-	return new TEntity(_tFuncs, _iX, _iY, _iHealth);
-}
-
-void CheckHealth(TEntity* _pEntity) {
-
-}
-
-void DrawEntity(TEntity* _pEntity) {
-	gotoxy(_pEntity->m_ix, _pEntity->m_iy);
-	printf("%c", _pEntity->m_iHealth + '0');
-}
+void DrawEntity(TEntity* _pEntity) { gotoxy(_pEntity->m_ix, _pEntity->m_iy); printf("%c", _pEntity->m_iHealth + '0'); }
 
 void MoveUp(TEntity* _pEntity) {
 	_pEntity->m_iy--;
-	if (_pEntity->m_iy < 0) _pEntity->m_iy = 20;
+	if (_pEntity->m_iy < MIN_SCREEN_SIZE) _pEntity->m_iy = MAX_SCREEN_SIZE;
 }
 
 void MoveDown(TEntity* _pEntity) {
 	_pEntity->m_iy++;
-	if (_pEntity->m_iy > 20) _pEntity->m_iy = 0;
+	if (_pEntity->m_iy > MAX_SCREEN_SIZE) _pEntity->m_iy = MIN_SCREEN_SIZE;
 }
 
 void MoveLeft(TEntity* _pEntity) {
 	_pEntity->m_ix--;
-	if (_pEntity->m_ix < 0) _pEntity->m_ix = 20;
+	if (_pEntity->m_ix < MIN_SCREEN_SIZE) _pEntity->m_ix = MAX_SCREEN_SIZE;
 }
 
 void MoveRight(TEntity* _pEntity) {
 	_pEntity->m_ix++;
-	if (_pEntity->m_ix > 20) _pEntity->m_ix = 0;
+	if (_pEntity->m_ix > MAX_SCREEN_SIZE) _pEntity->m_ix = MIN_SCREEN_SIZE;
 }
 
 void MoveDiagonal(TEntity* _pEntity) {
 	_pEntity->m_ix++;
 	_pEntity->m_iy++;
-	if (_pEntity->m_ix > 20) _pEntity->m_ix = 0;
-	if (_pEntity->m_iy > 20) _pEntity->m_iy = 0;
+	if (_pEntity->m_ix > MAX_SCREEN_SIZE) _pEntity->m_ix = MIN_SCREEN_SIZE;
+	if (_pEntity->m_iy > MAX_SCREEN_SIZE) _pEntity->m_iy = MIN_SCREEN_SIZE;
+}
+
+inline int RandomIntegerInRange(int _iMaxNumber, int _iOffset = 0) { return (rand() % _iMaxNumber + _iOffset); }
+
+void GenerateRandomEntity(std::list<TEntity*>& _rEntities) {
+	funcEntity tFunctions[6] = { &DrawEntity, &MoveUp, &MoveDown, &MoveRight, &MoveLeft, &MoveDiagonal };
+
+	_rEntities.push_back(new TEntity(tFunctions[0],
+		tFunctions[RandomIntegerInRange(5, 1)],
+		RandomIntegerInRange(MAX_SCREEN_SIZE, 1),
+		RandomIntegerInRange(MAX_SCREEN_SIZE, 1),
+		RandomIntegerInRange(9, 1)));
 }
 
 // ***************************************************************************************
@@ -75,41 +77,26 @@ void MoveDiagonal(TEntity* _pEntity) {
 int main() {
 	bool bStop = false;
 	
-	std::list<TEntity*> lTotalEntities;
-	std::list<TEntity*> lAliveEntities;
-	std::list<funcEntity*> lFuncs;
+	std::list<TEntity*> lEntities;
 	srand(time(NULL));
 
-	for (unsigned int uIndex = 0; uIndex < 5; uIndex++) {
-		funcEntity* tMyFunctions = new funcEntity[2];
-		lFuncs.push_back(tMyFunctions);
-
-		int iRandomNumber = RandomIntegerInRange(4);
-		if (iRandomNumber == 0) tMyFunctions[0] = &MoveUp;
-		else if (iRandomNumber == 1) tMyFunctions[0] = &MoveDown;
-		else if (iRandomNumber == 2) tMyFunctions[0] = &MoveRight;
-		else if (iRandomNumber == 3) tMyFunctions[0] = &MoveLeft;
-		else if (iRandomNumber == 4) tMyFunctions[0] = &MoveDiagonal;
-
-		tMyFunctions[1] = &DrawEntity;
-
-		lTotalEntities.push_back(GenerateEntity(tMyFunctions, RandomIntegerInRange(20, 1), RandomIntegerInRange(20, 1), RandomIntegerInRange(9, 1)));
-	}
+	for (unsigned int uIndex = 0; uIndex < MIN_ENTITIES; uIndex++) GenerateRandomEntity(lEntities);
 
 	while (!bStop) {
 		clear();
 	
-		for (std::list<TEntity*>::iterator it = lTotalEntities.begin(); it != lTotalEntities.end(); ++it) {
+		for (std::list<TEntity*>::iterator it = lEntities.begin(); it != lEntities.end(); ++it) {
 			((*it)->m_funcs[0])(*it);
 			((*it)->m_funcs[1])(*it);
 		}
+
+		while(lEntities.size() < MIN_ENTITIES)
+		
 	
 		hidecursor();
-	
-		Sleep(50);
 		bStop = (GetAsyncKeyState(VK_ESCAPE) & 0x01);
+		Sleep(50);
 	}
 
-	for (std::list<TEntity*>::iterator it = lTotalEntities.begin(); it != lTotalEntities.end(); ++it) delete *it;
-	for (std::list<funcEntity*>::iterator it = lFuncs.begin(); it != lFuncs.end(); ++it) delete[] *it;
+	for (std::list<TEntity*>::iterator it = lEntities.begin(); it != lEntities.end(); ++it) delete *it;
 }
