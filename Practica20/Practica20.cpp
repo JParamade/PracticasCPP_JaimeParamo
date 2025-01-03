@@ -1,7 +1,8 @@
 #include <stdio.h>
-#include <random>
-#include <chrono>
 #include <list>
+#include <random>
+#include <tuple>
+#include <algorithm>
 #include "consola.h"
 
 const unsigned int MIN_SCREEN_SIZE = 1;
@@ -20,13 +21,13 @@ struct TEntity
 	int m_iy;
 	int m_iHealth;
 	funcEntity m_funcs[2];
-	TEntity(funcEntity drawFunc, funcEntity moveFunc, int x, int y, int _iHealth)
+	TEntity(funcEntity _fDrawFunc, funcEntity _fMoveFunc, int x, int y, int _iHealth)
 	{
 		m_ix = x;
 		m_iy = y;
 		m_iHealth = _iHealth;
-		m_funcs[0] = drawFunc;
-		m_funcs[1] = moveFunc;
+		m_funcs[0] = _fDrawFunc;
+		m_funcs[1] = _fMoveFunc;
 	}
 };
 
@@ -65,6 +66,16 @@ void MoveRandom(TEntity* _pEntity)
 	if (_pEntity->m_ix < MIN_SCREEN_SIZE) _pEntity->m_ix = MAX_SCREEN_SIZE;
 }
 
+void CheckCollisions(std::list<TEntity*>& _lEntities) {
+	std::list<std::tuple<int, int, TEntity*>> lEntityTuple;
+
+	for (TEntity* pEntity : _lEntities) lEntityTuple.push_back(std::make_tuple(pEntity->m_ix, pEntity->m_iy, pEntity));
+
+	sort(lEntityTuple.begin(), lEntityTuple.end(), );
+
+	for ()
+}
+
 void GenerateRandomEntity(std::list<TEntity*>& _rEntities) {
 	funcEntity tFunctions[6] = {&DrawEntity, &MoveUp, &MoveDown, &MoveRight, &MoveLeft, &MoveRandom};
 
@@ -94,6 +105,8 @@ int main() {
 			((*it)->m_funcs[1])(*it);
 		}
 
+		CheckCollisions(lEntities);
+
 		while (lEntities.size() < MIN_ENTITIES) GenerateRandomEntity(lEntities);
 		
 		hidecursor();
@@ -101,5 +114,5 @@ int main() {
 		Sleep(50);
 	}
 
-	for (std::list<TEntity*>::iterator it = lEntities.begin(); it != lEntities.end(); ++it) delete *it;
+	for (TEntity* pEntity : lEntities) delete pEntity;
 }
