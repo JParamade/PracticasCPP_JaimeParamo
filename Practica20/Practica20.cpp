@@ -39,25 +39,25 @@ void DrawC(TEntity* _pEntity) { gotoxy(_pEntity->m_ix, _pEntity->m_iy); printf("
 void DrawD(TEntity* _pEntity) { gotoxy(_pEntity->m_ix, _pEntity->m_iy); printf("D"); _pEntity->cRepresentation = 'D';}
 void DrawE(TEntity* _pEntity) { gotoxy(_pEntity->m_ix, _pEntity->m_iy); printf("E"); _pEntity->cRepresentation = 'E';}
 
-void DrawHealth(TEntity* _pEntity, int _iHeight) { gotoxy(MIN_SCREEN_SIZE, MAX_SCREEN_SIZE + _iHeight); printf("Entity %c: %d", _pEntity->cRepresentation, _pEntity->m_iHealth); }
+void DrawHealth(TEntity* _pEntity, int _iHeight) { gotoxy(MIN_SCREEN_SIZE, MAX_SCREEN_SIZE + _iHeight); printf("Entity %c: %d HP", _pEntity->cRepresentation, _pEntity->m_iHealth); }
 
 void MoveUp(TEntity* _pEntity) {
-	_pEntity->m_iy--;
+	_pEntity->m_iy -= RandomIntegerInRange(2) ? 1 : 0;
 	if (_pEntity->m_iy < MIN_SCREEN_SIZE) _pEntity->m_iy = MAX_SCREEN_SIZE;
 }
 
 void MoveDown(TEntity* _pEntity) {
-	_pEntity->m_iy++;
+	_pEntity->m_iy += RandomIntegerInRange(2) ? 1 : 0;
 	if (_pEntity->m_iy > MAX_SCREEN_SIZE) _pEntity->m_iy = MIN_SCREEN_SIZE;
 }
 
 void MoveRight(TEntity* _pEntity) {
-	_pEntity->m_ix++;
+	_pEntity->m_ix += RandomIntegerInRange(2) ? 1 : 0;
 	if (_pEntity->m_ix > MAX_SCREEN_SIZE) _pEntity->m_ix = MIN_SCREEN_SIZE;
 }
 
 void MoveLeft(TEntity* _pEntity) {
-	_pEntity->m_ix--;
+	_pEntity->m_ix -= RandomIntegerInRange(2) ? 1 : 0;
 	if (_pEntity->m_ix < MIN_SCREEN_SIZE) _pEntity->m_ix = MAX_SCREEN_SIZE;
 }
 
@@ -111,8 +111,8 @@ void GenerateRandomEntity(std::list<TEntity*>& _rEntities) {
 								   {&DrawE, &MoveRandom}};
 
 	_rEntities.push_back(new TEntity(
-		tFunctions[RandomIntegerInRange(5, 1)][0],
-		tFunctions[RandomIntegerInRange(5, 1)][1],
+		tFunctions[RandomIntegerInRange(5)][0],
+		tFunctions[RandomIntegerInRange(5)][1],
 		RandomIntegerInRange(MAX_SCREEN_SIZE, 1),
 		RandomIntegerInRange(MAX_SCREEN_SIZE, 1),
 		RandomIntegerInRange(9, 1)));
