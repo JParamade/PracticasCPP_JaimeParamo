@@ -33,13 +33,13 @@ struct TEntity
 
 inline int RandomIntegerInRange(int _iMaxNumber, int _iOffset = 0) { return (rand() % _iMaxNumber + _iOffset); }
 
+void DrawHealth(TEntity* _pEntity, int _iHeight) { gotoxy(MIN_SCREEN_SIZE, MAX_SCREEN_SIZE + _iHeight); printf("Entity %c: %d HP", _pEntity->cRepresentation, _pEntity->m_iHealth); }
+
 void DrawA(TEntity* _pEntity) { gotoxy(_pEntity->m_ix, _pEntity->m_iy); printf("A"); _pEntity->cRepresentation = 'A';}
 void DrawB(TEntity* _pEntity) { gotoxy(_pEntity->m_ix, _pEntity->m_iy); printf("B"); _pEntity->cRepresentation = 'B';}
 void DrawC(TEntity* _pEntity) { gotoxy(_pEntity->m_ix, _pEntity->m_iy); printf("C"); _pEntity->cRepresentation = 'C';}
 void DrawD(TEntity* _pEntity) { gotoxy(_pEntity->m_ix, _pEntity->m_iy); printf("D"); _pEntity->cRepresentation = 'D';}
 void DrawE(TEntity* _pEntity) { gotoxy(_pEntity->m_ix, _pEntity->m_iy); printf("E"); _pEntity->cRepresentation = 'E';}
-
-void DrawHealth(TEntity* _pEntity, int _iHeight) { gotoxy(MIN_SCREEN_SIZE, MAX_SCREEN_SIZE + _iHeight); printf("Entity %c: %d HP", _pEntity->cRepresentation, _pEntity->m_iHealth); }
 
 void MoveUp(TEntity* _pEntity) {
 	_pEntity->m_iy -= RandomIntegerInRange(2) ? 1 : 0;
