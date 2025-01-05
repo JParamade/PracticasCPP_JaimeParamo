@@ -170,5 +170,17 @@ CString CString::Right(int n) const {
 }
 
 CString CString::Mid(int ofs, int n) {
+	if (ofs > Length()) return CString("");
+	if (ofs + n > Length()) return Right(ofs);
 
+	char* sBuffer = new char[n + 1];
+	strncpy_s(sBuffer, n + 1, static_cast<const char*>(m_p) + ofs, n);
+	sBuffer[n] = '\0';
+
+	CString oResult(sBuffer);
+
+	delete[] sBuffer;
+	sBuffer = nullptr;
+
+	return oResult;
 }
