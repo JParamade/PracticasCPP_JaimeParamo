@@ -115,7 +115,7 @@ const char& CString::operator[](unsigned int pos) const {
 }
 
 int CString::Length() const {
-	return strlen(static_cast<const char*>(m_p));
+	return static_cast<int>(strlen(static_cast<const char*>(m_p)));
 }
 
 CString CString::FromInt(int val) {
@@ -141,7 +141,7 @@ int CString::ToInt() const {
 }
 
 float CString::ToFloat() const {
-	return atof(static_cast<const char*>(m_p));
+	return static_cast<float>(atof(static_cast<const char*>(m_p)));
 }
 
 const char* CString::ToCString() const {
@@ -185,10 +185,50 @@ CString CString::Mid(int ofs, int n) {
 	return oResult;
 }
 
-CString CString::Replace(const CString& find, const CString& rep) const {
-	
-}
+//CString CString::Replace(const CString& find, const CString& rep) const {
+//	if (find.m_p || Find(find, 0) == -1) return *this;
+//
+//	while (Find(find, 0) != -1) {
+//
+//
+//	}
+//
+//	char* sBuffer = new char[n + 1];
+//	strncpy_s(sBuffer, n + 1, static_cast<const char*>(m_p) + ofs, n);
+//	sBuffer[n] = '\0';
+//	
+//	CString oResult(sBuffer);
+//	
+//	delete[] sBuffer;
+//	sBuffer = nullptr;
+//	
+//	return oResult;
+//}
 
 int CString::Find(const CString& str, int ofs) const {
+	if (ofs > str.Length()) return -1;
+	if (str.m_p) return -1;
 
+	const char* sFoundString = strstr(static_cast<const char*>(m_p), str.ToCString());
+	return sFoundString ? static_cast<int>(sFoundString - static_cast<const char*>(m_p)) : -1;
+}
+
+CString CString::ToUpper() const {
+	CString sUpper(*this);
+
+	for (int uIndex = 0; uIndex < sUpper.Length(); uIndex++) {
+		sUpper[uIndex] = static_cast<char>(toupper(sUpper[uIndex]));
+	}
+
+	return sUpper;
+}
+
+CString CString::ToLower() const {
+	CString sLower(*this);
+
+	for (int uIndex = 0; uIndex < sLower.Length(); uIndex++) {
+		sLower[uIndex] = static_cast<char>(tolower(sLower[uIndex]));
+	}
+
+	return sLower;
 }
