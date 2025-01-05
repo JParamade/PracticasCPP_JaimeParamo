@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <functional>
 
 class CString {
 public:
@@ -45,8 +46,8 @@ public:
     CString LTrim() const;
     CString RTrim() const;
     CString Trim() const;
-		// Rellena por la izquierda con el caracter "c" hasta completar el pataño pasado "len":
-		// 	CString("12345").LSet(10, 'x') --> "xxxxx12345"
+        // Rellena por la izquierda con el caracter "c" hasta completar el pataño pasado "len":
+        // 	CString("12345").LSet(10, 'x') --> "xxxxx12345"
     CString LSet(int len, char c) const;
     CString RSet(int len, char c) const;
 
@@ -61,5 +62,6 @@ public:
 private:
 	void *m_p;
 
+    void Map(CString& _sBuffer, std::function<char(char)> _fOperation) const;
 };
 

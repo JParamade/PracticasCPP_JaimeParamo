@@ -215,10 +215,8 @@ int CString::Find(const CString& str, int ofs) const {
 
 CString CString::ToUpper() const {
 	CString sUpper(*this);
-
-	for (int uIndex = 0; uIndex < sUpper.Length(); uIndex++) {
-		sUpper[uIndex] = static_cast<char>(toupper(sUpper[uIndex]));
-	}
+	
+	Map(sUpper, [](char _cChar) -> char { return static_cast<char>(toupper(_cChar)); });
 
 	return sUpper;
 }
@@ -226,9 +224,65 @@ CString CString::ToUpper() const {
 CString CString::ToLower() const {
 	CString sLower(*this);
 
-	for (int uIndex = 0; uIndex < sLower.Length(); uIndex++) {
-		sLower[uIndex] = static_cast<char>(tolower(sLower[uIndex]));
-	}
+	Map(sLower, [](char _cChar) -> char { return static_cast<char>(tolower(_cChar)); });
 
 	return sLower;
+}
+
+CString CString::LTrim() const {
+	const char* pStart = static_cast<const char*>(m_p);
+	while (isspace(*pStart)) pStart++;
+
+	return CString(pStart);
+}
+
+CString CString::RTrim() const {
+	int iStringLength = Length();
+	
+	while (iStringLength > 0 && isspace(static_cast<const char*>(m_p)[iStringLength - 1])) iStringLength--;
+
+	char* sBuffer = new char[iStringLength + 1];
+	strncpy_s(sBuffer, iStringLength + 1, static_cast<const char*>(m_p), iStringLength);
+	sBuffer[iStringLength] = '\0';
+
+	CString oResult(sBuffer);
+
+	delete[] sBuffer;
+	sBuffer = nullptr;
+
+	return oResult;
+}
+
+CString CString::Trim() const {
+	return LTrim().RTrim();
+}
+
+CString CString::LSet(int len, char c) const {
+	if (Length() == len) return *this;
+	
+	char* sBuffer = new char[len + 1];
+	
+	if (Length() > len) strcpy_s(sBuffer, len + 1, static_cast<const char*>(m_p) + (Length() - len));
+	else {
+		unsigned int uPatternSize = len - Length();
+		memset(sBuffer, c, uPatternSize);
+		strcpy_s(sBuffer + uPatternSize, Length() + 1, static_cast<const char*>(m_p));
+	}
+
+	CString oResult(sBuffer);
+
+	delete[] sBuffer;
+	sBuffer = nullptr;
+
+	return oResult;
+}
+
+CString CString::RSet(int len, char c) const {
+
+}
+
+void CString::Map(CString& _sBuffer, std::function<char(char)> _fOperation) const {
+	for (int uIndex = 0; uIndex < _sBuffer.Length(); uIndex++) {
+		_sBuffer[uIndex] = _fOperation(_sBuffer[uIndex]);
+	}
 }
