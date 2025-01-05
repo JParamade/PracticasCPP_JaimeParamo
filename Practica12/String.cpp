@@ -39,14 +39,15 @@ CString CString::operator+(const CString& other) const {
 	
 	unsigned int uStringSize = static_cast<unsigned int>(strlen(sString1) + strlen(sString2));
 
-	char* sTempString = new char[uStringSize + 1];
+	char* sBuffer = new char[uStringSize + 1];
 
-	strcpy_s(sTempString, uStringSize + 1, sString1);
-	strcat_s(sTempString, uStringSize + 1, sString2);
+	strcpy_s(sBuffer, uStringSize + 1, sString1);
+	strcat_s(sBuffer, uStringSize + 1, sString2);
 
-	CString oResult(sTempString);
+	CString oResult(sBuffer);
 
-	delete[] sTempString;
+	delete[] sBuffer;
+	sBuffer = nullptr;
 
 	return oResult;
 }
@@ -56,16 +57,17 @@ CString CString::operator+(char c) const {
 
 	unsigned int uStringSize = static_cast<unsigned int>(strlen(sString));
 
-	char* sTempString = new char[uStringSize + 2];
+	char* sBuffer = new char[uStringSize + 2];
 
-	strcpy_s(sTempString, uStringSize + 2, sString);
+	strcpy_s(sBuffer, uStringSize + 2, sString);
 
-	sTempString[uStringSize - 1] = c;
-	sTempString[uStringSize] = '\0';
+	sBuffer[uStringSize - 1] = c;
+	sBuffer[uStringSize] = '\0';
 
-	CString oResult(sTempString);
+	CString oResult(sBuffer);
 
-	delete[] sTempString;
+	delete[] sBuffer;
+	sBuffer = nullptr;
 
 	return oResult;
 }
@@ -144,4 +146,29 @@ float CString::ToFloat() const {
 
 const char* CString::ToCString() const {
 	return static_cast<const char*>(m_p);
+}
+
+CString CString::Left(int n) const {
+	if (n >= Length()) return CString(static_cast<const char*>(m_p));
+	
+	char* sBuffer = new char[n + 1];
+	strcpy_s(sBuffer, n + 1, static_cast<const char*>(m_p));
+	sBuffer[n] = '\0';
+
+	CString oResult(sBuffer);
+
+	delete[] sBuffer;
+	sBuffer = nullptr;
+
+	return oResult;
+}
+
+CString CString::Right(int n) const {
+	if (n >= Length()) return CString(static_cast<const char*>(m_p));
+
+	return CString(static_cast<const char*>(m_p) + (Length() - n));
+}
+
+CString CString::Mid(int ofs, int n) {
+
 }
