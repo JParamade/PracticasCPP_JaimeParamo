@@ -184,3 +184,11 @@ CString CString::Mid(int ofs, int n) {
 
 	return oResult;
 }
+
+CString CString::Replace(const CString& find, const CString& rep) const {
+	
+}
+
+int CString::Find(const CString& str, int ofs) const {
+
+}
