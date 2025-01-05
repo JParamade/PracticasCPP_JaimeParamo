@@ -16,10 +16,7 @@
 #include "string.h"
 
 int main() {
-	CString oString("Hola");
-	CString oString2("Adios");
 
-	// oString += oString2;
 
 	return 0;
 }
