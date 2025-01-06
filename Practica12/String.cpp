@@ -152,7 +152,7 @@ CString CString::Left(int n) const {
 	if (n >= Length()) return CString(static_cast<const char*>(m_p));
 	
 	char* sBuffer = new char[n + 1];
-	strcpy_s(sBuffer, n + 1, static_cast<const char*>(m_p));
+	strncpy_s(sBuffer, n + 1, static_cast<const char*>(m_p), n);
 	sBuffer[n] = '\0';
 
 	CString oResult(sBuffer);
@@ -301,7 +301,7 @@ CString CString::StripExt() const {
 	const char* pDot = strrchr(static_cast<const char*>(m_p), '.');
 	if (!pDot || pDot == static_cast<const char*>(m_p)) return *this;
 
-	unsigned int uStringSize = pDot - static_cast<const char*>(m_p);
+	unsigned int uStringSize = static_cast<unsigned int>(pDot - static_cast<const char*>(m_p));
 	char* sBuffer = new char[uStringSize + 1];
 	strncpy_s(sBuffer, uStringSize + 1, static_cast<const char*>(m_p), uStringSize);
 	sBuffer[uStringSize] = '\0';
@@ -333,7 +333,7 @@ CString CString::ExtractDir() const {
 	if (!pSlash) pSlash = strrchr(static_cast<const char*>(m_p), '\\');
 	if (!pSlash) return CString("");
 
-	unsigned int uStringSize = pSlash - static_cast<const char*>(m_p) + 1;
+	unsigned int uStringSize = static_cast<unsigned int>(pSlash - static_cast<const char*>(m_p) + 1);
 	char* sBuffer = new char[uStringSize + 1];
 	strncpy_s(sBuffer, uStringSize + 1, static_cast<const char*>(m_p), uStringSize);
 	sBuffer[uStringSize] = '\0';
