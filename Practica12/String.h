@@ -38,7 +38,7 @@ public:
     CString Left(int n) const;
     CString Right(int n) const;
     CString Mid(int ofs, int n);
-    CString Replace(const CString& find, const CString& rep) const;
+    // CString Replace(const CString& find, const CString& rep) const;
     int Find(const CString& str, int ofs) const;
 
     CString ToUpper() const;
@@ -46,8 +46,6 @@ public:
     CString LTrim() const;
     CString RTrim() const;
     CString Trim() const;
-        // Rellena por la izquierda con el caracter "c" hasta completar el pataño pasado "len":
-        // 	CString("12345").LSet(10, 'x') --> "xxxxx12345"
     CString LSet(int len, char c) const;
     CString RSet(int len, char c) const;
 

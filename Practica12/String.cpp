@@ -278,7 +278,112 @@ CString CString::LSet(int len, char c) const {
 }
 
 CString CString::RSet(int len, char c) const {
+	if (Length() == len) return *this;
+	
+	char* sBuffer = new char[len + 1];
+	
+	if (Length() > len) strncpy_s(sBuffer, len + 1, static_cast<const char*>(m_p), len);
+	else {
+		strcpy_s(sBuffer, Length() + 1, static_cast<const char*>(m_p));
+		memset(sBuffer + Length(), c, len - Length());
+	}
+	sBuffer[len] = '\0';
 
+	CString oResult(sBuffer);
+
+	delete[] sBuffer;
+	sBuffer = nullptr;
+
+	return oResult;
+}
+
+CString CString::StripExt() const {
+	const char* pDot = strrchr(static_cast<const char*>(m_p), '.');
+	if (!pDot || pDot == static_cast<const char*>(m_p)) return *this;
+
+	unsigned int uStringSize = pDot - static_cast<const char*>(m_p);
+	char* sBuffer = new char[uStringSize + 1];
+	strncpy_s(sBuffer, uStringSize + 1, static_cast<const char*>(m_p), uStringSize);
+	sBuffer[uStringSize] = '\0';
+
+	CString oResult(sBuffer);
+
+	delete[] sBuffer;
+	sBuffer = nullptr;
+
+	return oResult;
+}
+
+CString CString::StripDir() const {
+	const char* pSlash = strrchr(static_cast<const char*>(m_p), '/');
+	if (!pSlash) pSlash = strrchr(static_cast<const char*>(m_p), '\\');
+
+	return pSlash ? CString(pSlash + 1) : *this;
+}
+
+CString CString::ExtractExt() const {
+	const char* pDot = strrchr(static_cast<const char*>(m_p), '.');
+	if (!pDot || pDot == static_cast<const char*>(m_p)) return CString("");
+
+	return CString(pDot + 1);
+}
+
+CString CString::ExtractDir() const {
+	const char* pSlash = strrchr(static_cast<const char*>(m_p), '/');
+	if (!pSlash) pSlash = strrchr(static_cast<const char*>(m_p), '\\');
+	if (!pSlash) return CString("");
+
+	unsigned int uStringSize = pSlash - static_cast<const char*>(m_p) + 1;
+	char* sBuffer = new char[uStringSize + 1];
+	strncpy_s(sBuffer, uStringSize + 1, static_cast<const char*>(m_p), uStringSize);
+	sBuffer[uStringSize] = '\0';
+
+	CString oResult(sBuffer);
+
+	delete[] sBuffer;
+	sBuffer = nullptr;
+
+	return oResult;
+}
+
+CString CString::RealPath() const {
+	char sBuffer[_MAX_PATH];
+	if (_fullpath(sBuffer, static_cast<const char*>(m_p), _MAX_PATH)) return CString(sBuffer);
+	
+	return *this;
+}
+
+CString CString::Read(const CString& filename) {
+	FILE* pFile;
+	fopen_s(&pFile, filename.ToCString(), "r");
+	if (!pFile) return CString("");
+	
+	fseek(pFile, 0, SEEK_END);
+	unsigned int uStringSize = ftell(pFile);
+	fseek(pFile, 0, SEEK_SET);
+
+	char* sBuffer = new char[uStringSize + 1];
+	fread(sBuffer, sizeof(char), uStringSize, pFile);
+	sBuffer[uStringSize] = '\0';
+
+	fclose(pFile);
+
+	CString oResult(sBuffer);
+
+	delete[] sBuffer;
+	sBuffer = nullptr;
+
+	return oResult;
+}
+
+void CString::Write(const CString& filename, bool append) const {
+	FILE* pFile;
+	fopen_s(&pFile, filename.ToCString(), append ? "a" : "w");
+	if (!pFile) return;
+
+	fputs(static_cast<const char*>(m_p), pFile);
+
+	fclose(pFile);
 }
 
 void CString::Map(CString& _sBuffer, std::function<char(char)> _fOperation) const {
