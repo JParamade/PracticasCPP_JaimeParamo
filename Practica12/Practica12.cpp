@@ -51,11 +51,17 @@ int main() {
 	// Test F: Replace
 
 	// Test G: Path Operations
+	oString = "ThisIsATest.exe";
+	printf("\033[1;31mTest G: \033[1;36mExtension -> \033[0m%s\n", (oString.ExtractExt()).ToCString());
+	printf("\t\033[1;36mName -> \033[0m%s\n\t\033[1;36mReal Path -> \033[0m%s\n", (oString.StripExt()).ToCString(), 
+																				  (oString.RealPath()).ToCString());
+	printf("\n");
 
 	// Test H: File Operations
-	printf("\033[1;31mTest F: \033[0m%s\n", (oString.Read("Test.txt")).ToCString());
+	printf("\033[1;31mTest H: \033[0m%s\n", (oString.Read("Test.txt")).ToCString());
 	oString = " This is a write test.";
 	oString.Write("Test.txt");
+	printf("\t%s\n", (oString.Read("Test.txt")).ToCString());
 
 	return 0;
 }
