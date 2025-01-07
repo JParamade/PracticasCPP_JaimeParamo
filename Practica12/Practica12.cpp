@@ -1,17 +1,3 @@
-/********************
-   WORK IN PROGRESS
-********************/
-
-/********************
-   12. (OPCIONAL) Operadores:
-		a. Dada la clase “CString” declarada en el fichero “String.h” implementar en un
-		fichero .cpp toda la funcionalidad de dicha clase.
-		b. Mejora: Implementar funcionalidad para que se puedan realizar operaciones
-		de tipo:
-			i. CString str(“hola ”);
-			ii. CString str2 = “Hola“ + str + “caracola”
-********************/
-
 #include <iostream>
 #include "string.h"
 
@@ -67,6 +53,11 @@ int main() {
 	oString = " This is a write test.";
 	oString.Write("Test.txt");
 	printf("\t%s\n", (oString.Read("Test.txt")).ToCString());
+	printf("\n");
+
+	// Test I: RValue Operation
+	oString = " is an RValue Operation test.";
+	printf("\033[1;31mTest I: \033[0m%s\n", ("This" + oString).ToCString());
 
 	return 0;
 }

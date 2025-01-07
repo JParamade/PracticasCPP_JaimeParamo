@@ -63,3 +63,4 @@ private:
     void Map(CString& _sBuffer, std::function<char(char)> _fOperation) const;
 };
 
+CString operator+(const char* lhs, const CString& rhs);

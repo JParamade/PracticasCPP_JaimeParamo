@@ -435,3 +435,7 @@ void CString::Map(CString& _sBuffer, std::function<char(char)> _fOperation) cons
 		_sBuffer[uIndex] = _fOperation(_sBuffer[uIndex]);
 	}
 }
+
+CString operator+(const char* lhs, const CString& rhs) {
+	return CString(lhs) + rhs;
+}
