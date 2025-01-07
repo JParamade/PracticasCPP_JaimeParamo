@@ -185,25 +185,79 @@ CString CString::Mid(int ofs, int n) {
 	return oResult;
 }
 
-//CString CString::Replace(const CString& find, const CString& rep) const {
-//	if (find.m_p || Find(find, 0) == -1) return *this;
-//
-//	while (Find(find, 0) != -1) {
-//
-//
-//	}
-//
-//	char* sBuffer = new char[n + 1];
-//	strncpy_s(sBuffer, n + 1, static_cast<const char*>(m_p) + ofs, n);
-//	sBuffer[n] = '\0';
-//	
-//	CString oResult(sBuffer);
-//	
-//	delete[] sBuffer;
-//	sBuffer = nullptr;
-//	
-//	return oResult;
-//}
+// Implemented Knuth-Morris-Pratt (KMP) Algorithm.
+CString CString::Replace(const CString& find, const CString& rep) const {
+	// LPS (Longest Prefix which is also a Suffix) Computing
+	unsigned int uStringLength = static_cast<unsigned int>(Length());
+	unsigned int uPatternLength = static_cast<unsigned int>(find.Length());
+	unsigned int uReplaceLength = static_cast<unsigned int>(rep.Length());
+
+	if (uPatternLength > uStringLength) return *this;
+	if (uPatternLength <= 0) return *this;
+
+	unsigned int* aLPS = new unsigned int[uPatternLength]();
+	aLPS[0] = 0;
+
+	unsigned int uCurrentLength = 0;
+	for (unsigned int uIndex = 1; uIndex < uPatternLength; uIndex++) {
+		while (uCurrentLength > 0 && find[uIndex] != find[uCurrentLength]) uCurrentLength = aLPS[uCurrentLength - 1];
+
+		if (find[uIndex] == find[uCurrentLength]) uCurrentLength++;
+
+		aLPS[uIndex] = uCurrentLength;
+	}
+
+	// Search & Replace Phase
+	unsigned int uStringIterator = 0;
+	unsigned int uPatternIterator = 0;
+	
+	char* sBuffer;
+	CString oResult(*this);
+
+	while (uStringIterator < uStringLength) {
+		if (((*this)[uStringIterator] == find[uPatternIterator])) {
+			uStringIterator++;
+			uPatternIterator++;
+
+			if (uPatternIterator == uPatternLength) {
+				if (uPatternLength == uReplaceLength) {
+					sBuffer = new char[uStringLength + 1];
+
+					strncpy_s(sBuffer, uStringLength + 1, oResult.ToCString(), uStringIterator - uPatternIterator);
+					strcat_s(sBuffer, uStringLength + 1, rep.ToCString());
+					strcat_s(sBuffer, uStringLength + 1, ToCString() + (uStringIterator - uPatternIterator) + uReplaceLength);
+
+					sBuffer[uStringLength] = '\0';
+				}
+				else {
+					unsigned int uBufferSize = uStringLength + (uPatternLength > uReplaceLength ? (uPatternLength - uReplaceLength) * -1 : (uReplaceLength - uPatternLength));
+					sBuffer = new char[uBufferSize + 1];
+					
+					strncpy_s(sBuffer, uBufferSize + 1, oResult.ToCString(), uStringIterator - uPatternIterator);
+					strcat_s(sBuffer, uBufferSize + 1, rep.ToCString());
+					strcat_s(sBuffer, uBufferSize + 1, ToCString() + (uStringIterator - uPatternIterator) + uPatternLength);
+
+					sBuffer[uBufferSize] = '\0';
+				}
+
+				oResult = sBuffer;
+
+				delete[] sBuffer;
+				sBuffer = nullptr;
+
+				uPatternIterator = aLPS[uPatternIterator - 1];
+			}
+		}
+		else {
+			if (uPatternIterator != 0) uPatternIterator = aLPS[uPatternIterator - 1];
+			else uStringIterator++;
+		}
+	}
+
+	delete[] aLPS;
+
+	return oResult;
+}
 
 int CString::Find(const CString& str, int ofs) const {
 	if (ofs > str.Length()) return -1;
