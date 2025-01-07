@@ -210,37 +210,27 @@ CString CString::Replace(const CString& find, const CString& rep) const {
 	// Search & Replace Phase
 	unsigned int uStringIterator = 0;
 	unsigned int uPatternIterator = 0;
-	
+
 	char* sBuffer;
 	CString oResult(*this);
 
 	while (uStringIterator < uStringLength) {
-		if (((*this)[uStringIterator] == find[uPatternIterator])) {
+		if (oResult[uStringIterator] == find[uPatternIterator]) {
 			uStringIterator++;
 			uPatternIterator++;
 
 			if (uPatternIterator == uPatternLength) {
-				if (uPatternLength == uReplaceLength) {
-					sBuffer = new char[uStringLength + 1];
+				unsigned int uBufferSize = uStringLength + (uPatternLength == uReplaceLength ? 0 : (uPatternLength > uReplaceLength ? (uPatternLength - uReplaceLength) * -1 : (uReplaceLength - uPatternLength)));
+				sBuffer = new char[uBufferSize + 1];
 
-					strncpy_s(sBuffer, uStringLength + 1, oResult.ToCString(), uStringIterator - uPatternIterator);
-					strcat_s(sBuffer, uStringLength + 1, rep.ToCString());
-					strcat_s(sBuffer, uStringLength + 1, ToCString() + (uStringIterator - uPatternIterator) + uReplaceLength);
+				strncpy_s(sBuffer, uBufferSize + 1, oResult.ToCString(), uStringIterator - uPatternIterator);
+				strcat_s(sBuffer, uBufferSize + 1, rep.ToCString());
+				strcat_s(sBuffer, uBufferSize + 1, oResult.ToCString() + (uStringIterator - uPatternIterator) + uPatternLength);
 
-					sBuffer[uStringLength] = '\0';
-				}
-				else {
-					unsigned int uBufferSize = uStringLength + (uPatternLength > uReplaceLength ? (uPatternLength - uReplaceLength) * -1 : (uReplaceLength - uPatternLength));
-					sBuffer = new char[uBufferSize + 1];
-					
-					strncpy_s(sBuffer, uBufferSize + 1, oResult.ToCString(), uStringIterator - uPatternIterator);
-					strcat_s(sBuffer, uBufferSize + 1, rep.ToCString());
-					strcat_s(sBuffer, uBufferSize + 1, ToCString() + (uStringIterator - uPatternIterator) + uPatternLength);
-
-					sBuffer[uBufferSize] = '\0';
-				}
+				sBuffer[uBufferSize] = '\0';
 
 				oResult = sBuffer;
+				uStringLength = oResult.Length();
 
 				delete[] sBuffer;
 				sBuffer = nullptr;

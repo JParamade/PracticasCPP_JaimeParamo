@@ -51,7 +51,7 @@ int main() {
 	// Test F: Replace
 	CString oString = "HOLABUENAHOLA";
 	printf("%s\n", oString.ToCString());
-	oString = oString.Replace("HOLA", "ADIO");
+	oString = oString.Replace("HOLA", "!!90214870'21740'1");
 	printf("%s\n", oString.ToCString());
 
 	// // Test G: Path Operations
